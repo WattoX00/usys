@@ -39,14 +39,31 @@ class Functions():
         cmd = ["sudo", "userdel", "-r", name]
         subprocess.run(cmd)
 
+
+    # set password for <user>
+    # append to group (-aG group name)
+    # change name (usermod -l new old)
+    # change shell (-s shell name)
+
+    # GROUPS
+    # sudo groupadd <groupname>
+    # change name groupmod -n <newname> <oldname>
+    # delete user from group gpasswd -d <user> <group>
+    # delete group sudo groupdel <groupname>
+
+    #listings
+
     def listUsers():
-        subprocess.run(['bash', '-c', '''getent passwd | awk -F: '$3 >= 1000 {print $1}'
-'''])
+        subprocess.run(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"])
+
     def listGroups():
         subprocess.run([
             "bash",
             "-c",
             "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"
         ])
+    # READ MORE GROUP stuff
+    # getent group <groupname>
+    # groups <username>
 
 
