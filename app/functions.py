@@ -17,7 +17,7 @@ class Functions():
         # Groups
         groupQ = input(f'Do you want to add ({newUserName}) to a group (Y/n) ').lower()
         if groupQ in ("y", "yes", ""):
-            listGroups()
+            Functions.listGroups()
             groupName = input('Primary group first, then secondary groups separated by space: ').lower()
             groups = groupName.split()
 
@@ -34,12 +34,15 @@ class Functions():
     # remove user with home dir
 
     def deleteUser():
-        name = str(input(''))
-
-        cmd = ["sudo", "userdel", "-r", name]
+        username = str(input('Remove user [name]: '))
+        cmd = ["sudo", "userdel"]
+        if Functions.getHomeDir(username):
+            cmd.append("-r")
+        cmd.append(username)
         subprocess.run(cmd)
 
-
+    def userPassword():
+        pass
     # set password for <user>
     # append to group (-aG group name)
     # change name (usermod -l new old)
@@ -62,6 +65,19 @@ class Functions():
             "-c",
             "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"
         ])
+
+    def getHomeDir(username):
+        result = subprocess.run(
+            ["getent", "passwd", username],
+            capture_output=True,
+            text=True
+        )
+
+        if result.returncode == 0:
+            home = result.stdout.split(":")[5]
+            return(home)
+
+
     # READ MORE GROUP stuff
     # getent group <groupname>
     # groups <username>
