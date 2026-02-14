@@ -3,7 +3,6 @@ import subprocess
 class Functions():
 
     # add a user
-
     def userAdd():
         newUserName = input('New User Name: ').strip()
 
@@ -50,11 +49,13 @@ class Functions():
  
     # Append to Groups
     def appendToGroup():
+        Functions.listUsers()
+        username = str(input('USERNAME: '))
         Functions.listGroups()
         groupName = input('Groups separated by space: ').lower()
         group = groupName.split(' ')
         groups = ','.join(group)
-        cmd = ["sudo", "usermod", "-aG", groups]
+        cmd = ["sudo", "usermod", "-aG", groups, username]
         subprocess.run(cmd)
 
     # Change name
@@ -64,8 +65,11 @@ class Functions():
         new = str(input('New name: '))
         cmd = ["sudo", "usermod", "-l", new, old]
         subprocess.run(cmd)
+ 
     # Change shell
     def changeShell():
+        Functions.listUsers()
+        username = str(input('USERNAME: '))
         shellname = str(input('Change shell full path (/bin/bash): '))
         cmd = ["sudo", "usermod", "-s", shellname]
         subprocess.run(cmd)
@@ -76,12 +80,8 @@ class Functions():
         groupname = str(input('New group [name]: '))
         cmd = ["sudo", "groupadd", groupname]
         subprocess.run(cmd)
-    # change name groupmod -n <newname> <oldname>
-    # delete user from group gpasswd -d <user> <group>
-    # delete group sudo groupdel <groupname>
 
     #listings
-
     def listUsers():
         subprocess.run(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"])
 
@@ -99,9 +99,23 @@ class Functions():
             home = result.stdout.split(":")[5]
             return(home)
 
+    def listGroupInfo():
+        groupname = Functions.groupName()
+        cmd = ["getent", "group", groupname[0]]
+        subprocess.run(cmd)
 
-    # READ MORE GROUP stuff
-    # getent group <groupname>
-    # groups <username>
+    def listUserGroups():
+        username = Functions.userName()
+        cmd = ["groups", username]
+        subprocess.run(cmd)
 
+    # Helpers
+    def groupName():
+        Functions.listGroups()
+        groupname = str(input('Group name separated by space: ')).lower()
+        return groupname.split(' ')
 
+    def userName():
+        Functions.listUsers()
+        username = str(input('User name: ')).lower()
+        return username
