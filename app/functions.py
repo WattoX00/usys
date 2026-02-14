@@ -46,7 +46,7 @@ class Functions():
         username = Functions.userName()
         groupName = Functions.groupName()
 
-        groups = ','.join(group)
+        groups = ','.join(groupName)
         cmd = ["sudo", "usermod", "-aG", groups, username]
 
         Functions.executeCmd(cmd)
@@ -75,34 +75,37 @@ class Functions():
 
         Functions.executeCmd(cmd)
 
+    def groupDel():
+        pass
+
+
     #listings
     def listUsers():
-        Functions.executeCmd(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"])
-
+        result = Functions.executeCmd(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"], capture=True)
+        print(result.stdout)
+    
     def listGroups():
-        Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"])
-
+        result = Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"], capture=True)
+        print(result.stdout)
 
     def getHomeDir():
         username = Functions.userName()
-        result = Functions.executeCmd(
-            ["getent", "passwd", username],
-            capture=True
-        )
+        result = Functions.executeCmd(["getent", "passwd", username], capture=True)
 
         home = result.stdout.split(":")[5]
         print(home)
-        return home
 
     def listGroupInfo():
         groupname = Functions.groupName()
         cmd = ["getent", "group", groupname[0]]
-        Functions.executeCmd(cmd)
+
+        print(Functions.executeCmd(cmd, capture=True).stdout)
 
     def listUserGroups():
         username = Functions.userName()
         cmd = ["groups", username]
-        Functions.executeCmd(cmd)
+
+        print(Functions.executeCmd(cmd, capture=True).stdout)
 
     # Helpers
     def groupName():
@@ -117,9 +120,5 @@ class Functions():
 
     def executeCmd(cmd, check=True, capture=False):
         import subprocess
-        return subprocess.run(
-            cmd,
-            check=check,
-            capture_output=capture,
-            text=True
-        )
+        return subprocess.run(cmd, check=check, capture_output=capture, text=True)
+
