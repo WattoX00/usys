@@ -42,8 +42,18 @@ class Functions():
         subprocess.run(cmd)
 
     def userPassword():
-        pass
-    # set password for <user>
+        username = str(input('Change password for user [name]: '))
+        cmd = ["sudo", "passwd", username]
+        subprocess.run(cmd)
+    
+    def appendToGroup():
+        cmd = ["sudo", "-aG", group]
+    
+    def changeName():
+        cmd = ["sudo", "usermod", "-l", new, old]
+
+    def changeShell():
+        cmd = ["sudo", "usermod", "-s", shellname]
     # append to group (-aG group name)
     # change name (usermod -l new old)
     # change shell (-s shell name)
@@ -60,11 +70,7 @@ class Functions():
         subprocess.run(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"])
 
     def listGroups():
-        subprocess.run([
-            "bash",
-            "-c",
-            "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"
-        ])
+        subprocess.run(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"])
 
     def getHomeDir(username):
         result = subprocess.run(
