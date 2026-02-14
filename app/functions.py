@@ -1,5 +1,3 @@
-import subprocess
-
 class Functions():
 
     # add a user
@@ -27,7 +25,7 @@ class Functions():
 
         cmd.append(newUserName)
 
-        subprocess.run(cmd)
+        Functions.executeCmd(cmd)
 
     # remove user
     def deleteUser():
@@ -38,24 +36,23 @@ class Functions():
             cmd.append("-r")
         cmd.append(username)
 
-        subprocess.run(cmd)
+        Functions.executeCmd(cmd)
 
     # Add/change password
     def userPassword():
         username = Functions.userName()
         cmd = ["sudo", "passwd", username]
-        subprocess.run(cmd)
+        Functions.executeCmd(cmd)
  
     # Append to Groups
     def appendToGroup():
-        username = Functions.username()
+        username = Functions.userName()
         groupName = Functions.groupName()
 
-        group = groupName.split(' ')
         groups = ','.join(group)
         cmd = ["sudo", "usermod", "-aG", groups, username]
 
-        subprocess.run(cmd)
+        Functions.executeCmd(cmd)
 
     # Change name
     def changeName():
@@ -63,15 +60,15 @@ class Functions():
         new = str(input('New name: '))
         cmd = ["sudo", "usermod", "-l", new, old]
 
-        subprocess.run(cmd)
+        Functions.executeCmd(cmd)
  
     # Change shell
     def changeShell():
         username = Functions.userName()
         shellname = str(input('Change shell full path (/bin/bash): '))
-        cmd = ["sudo", "usermod", "-s", shellname]
+        cmd = ["sudo", "usermod", "-s", shellname, username]
 
-        subprocess.run(cmd)
+        Functions.executeCmd(cmd)
     # GROUPS
 
     # sudo groupadd <groupname>
@@ -79,17 +76,17 @@ class Functions():
         groupname = Functions.groupName()
         cmd = ["sudo", "groupadd", groupname]
 
-        subprocess.run(cmd)
+        Functions.executeCmd(cmd)
 
     #listings
     def listUsers():
-        subprocess.run(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"])
+        Functions.executeCmd(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"])
 
     def listGroups():
-        subprocess.run(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"])
+        Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"])
 
     def getHomeDir(username):
-        result = subprocess.run(
+        result = Functions.executeCmd(
             ["getent", "passwd", username],
             capture_output=True,
             text=True
@@ -102,12 +99,12 @@ class Functions():
     def listGroupInfo():
         groupname = Functions.groupName()
         cmd = ["getent", "group", groupname[0]]
-        subprocess.run(cmd)
+        Functions.executeCmd(cmd)
 
     def listUserGroups():
         username = Functions.userName()
         cmd = ["groups", username]
-        subprocess.run(cmd)
+        Functions.executeCmd(cmd)
 
     # Helpers
     def groupName():
@@ -120,3 +117,6 @@ class Functions():
         username = str(input('User name: ')).lower().strip()
         return username
 
+    def executeCmd(cmd):
+        import subprocess
+        subprocess.run(cmd)
