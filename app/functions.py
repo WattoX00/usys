@@ -31,53 +31,54 @@ class Functions():
 
     # remove user
     def deleteUser():
-        Functions.listUsers()
-        username = str(input('Remove user [name]: '))
+        username = Functions.userName()
+
         cmd = ["sudo", "userdel"]
         if Functions.getHomeDir(username):
             cmd.append("-r")
         cmd.append(username)
+
         subprocess.run(cmd)
 
     # Add/change password
     def userPassword():
-        Functions.listUsers()
-        username = str(input('Change password for user [name]: '))
+        username = Functions.userName()
         cmd = ["sudo", "passwd", username]
         subprocess.run(cmd)
  
     # Append to Groups
     def appendToGroup():
-        Functions.listUsers()
-        username = str(input('USERNAME: '))
-        Functions.listGroups()
-        groupName = input('Groups separated by space: ').lower()
+        username = Functions.username()
+        groupName = Functions.groupName()
+
         group = groupName.split(' ')
         groups = ','.join(group)
         cmd = ["sudo", "usermod", "-aG", groups, username]
+
         subprocess.run(cmd)
 
     # Change name
     def changeName():
-        Functions.listUsers()
-        old = str(input('User to change name [name]: '))
+        old = Functions.userName()
         new = str(input('New name: '))
         cmd = ["sudo", "usermod", "-l", new, old]
+
         subprocess.run(cmd)
  
     # Change shell
     def changeShell():
-        Functions.listUsers()
-        username = str(input('USERNAME: '))
+        username = Functions.userName()
         shellname = str(input('Change shell full path (/bin/bash): '))
         cmd = ["sudo", "usermod", "-s", shellname]
+
         subprocess.run(cmd)
     # GROUPS
 
     # sudo groupadd <groupname>
     def groupAdd():
-        groupname = str(input('New group [name]: '))
+        groupname = Functions.groupName()
         cmd = ["sudo", "groupadd", groupname]
+
         subprocess.run(cmd)
 
     #listings
