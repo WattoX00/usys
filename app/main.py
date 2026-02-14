@@ -14,7 +14,7 @@ def main():
         "9": ("List groups", Functions.listGroups),
         "10": ("List user-groups info", Functions.listUserGroups),
         "11": ("List group info", Functions.listGroupInfo),
-
+        "12": ("List home dir", Functions.getHomeDir),
         "0": ("Exit", None),
     }
 

@@ -31,10 +31,7 @@ class Functions():
     def deleteUser():
         username = Functions.userName()
 
-        cmd = ["sudo", "userdel"]
-        if Functions.getHomeDir(username):
-            cmd.append("-r")
-        cmd.append(username)
+        cmd = ["sudo", "userdel", "-r", username]
 
         Functions.executeCmd(cmd)
 
@@ -85,16 +82,17 @@ class Functions():
     def listGroups():
         Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"])
 
-    def getHomeDir(username):
+
+    def getHomeDir():
+        username = Functions.userName()
         result = Functions.executeCmd(
             ["getent", "passwd", username],
-            capture_output=True,
-            text=True
+            capture=True
         )
 
-        if result.returncode == 0:
-            home = result.stdout.split(":")[5]
-            return(home)
+        home = result.stdout.split(":")[5]
+        print(home)
+        return home
 
     def listGroupInfo():
         groupname = Functions.groupName()
@@ -117,6 +115,11 @@ class Functions():
         username = str(input('User name: ')).lower().strip()
         return username
 
-    def executeCmd(cmd):
+    def executeCmd(cmd, check=True, capture=False):
         import subprocess
-        subprocess.run(cmd)
+        return subprocess.run(
+            cmd,
+            check=check,
+            capture_output=capture,
+            text=True
+        )
