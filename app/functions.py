@@ -4,7 +4,7 @@ class Functions():
 
     # add a user
     def userAdd():
-        newUserName = input('New User Name: ').strip()
+        newUserName = Functions.userName()
 
         cmd = ["sudo", "useradd"]
 
@@ -17,10 +17,9 @@ class Functions():
         groupQ = input(f'Do you want to add ({newUserName}) to a group (Y/n) ').lower()
         if groupQ in ("y", "yes", ""):
             Functions.listGroups()
-            groupName = input('Primary group first, then secondary groups separated by space: ').lower()
-            groups = groupName.split()
+            groups = Functions.groupName()
 
-            if len(groups) >= 1:
+            if len(groups) == 1:
                 cmd += ["-g", groups[0]]
 
             if len(groups) > 1:
@@ -112,10 +111,11 @@ class Functions():
     # Helpers
     def groupName():
         Functions.listGroups()
-        groupname = str(input('Group name separated by space: ')).lower()
+        groupname = str(input('Group name separated by space: ')).lower().strip()
         return groupname.split(' ')
 
     def userName():
         Functions.listUsers()
-        username = str(input('User name: ')).lower()
+        username = str(input('User name: ')).lower().strip()
         return username
+
