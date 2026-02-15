@@ -1,16 +1,31 @@
 from functions import Functions
 
+
 COMMANDS = {
-    "": Functions.userAdd,
-    "": Functions.deleteUser,
-    "": Functions.userPassword,
-    "": Functions.appendToGroup,
-    "": Functions.changeName,
-    "": Functions.changeShell,
-    "": Functions.groupAdd,
-    "": Functions.groupDel,
-    "": Functions.listUsers,
-    "": Functions.listGroups,
-    "": Functions.listGroupInfo,
-    "": Functions.getHomeDir,
+    "adduser": Functions.userAdd,
+    "deluser": Functions.deleteUser,
+    "passwd": Functions.userPassword,
+    "appendgroup": Functions.appendToGroup,
+    "chname": Functions.changeName,
+    "chshell": Functions.changeShell,
+    "addgroup": Functions.groupAdd,
+    "delgroup": Functions.groupDel,
+    "listuser": Functions.listUsers,
+    "listgroups": Functions.listGroups,
+    "groupinfo": Functions.listGroupInfo,
+    "homedir": Functions.getHomeDir,
+}
+ALIASES = {
+    "au": "adduser",
+    "du": "deluser",
+    "pw": "passwd",
+    "ag": "appendgroup",
+    "cn": "chname",
+    "cs": "chshell",
+    "ga": "addgroup",
+    "gd": "delgroup",
+    "lu": "listuser",
+    "lg": "listgroups",
+    "gi": "groupinfo",
+    "hd": "homedir",
 }
