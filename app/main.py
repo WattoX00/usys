@@ -1,37 +1,35 @@
 from functions import Functions
 
+from .functionality.prompts import Prompts
+from commands import COMMANDS
+from .functionality.commands import Commands
 
 def main():
-    actions = {
-        "1": ("Add user", Functions.userAdd),
-        "2": ("Delete user", Functions.deleteUser),
-        "3": ("Change password", Functions.userPassword),
-        "4": ("Append to group", Functions.appendToGroup),
-        "5": ("Change name", Functions.changeName),
-        "6": ("Change shell", Functions.changeShell),
-        "7": ("Add group", Functions.groupAdd),
-        "8": ("List users", Functions.listUsers),
-        "9": ("List groups", Functions.listGroups),
-        "10": ("List user-groups info", Functions.listUserGroups),
-        "11": ("List group info", Functions.listGroupInfo),
-        "12": ("List home dir", Functions.getHomeDir),
-        "0": ("Exit", None),
-    }
+    # main loop
 
     while True:
-        print("\n--- MENU ---")
-        for key, (title, _) in actions.items():
-            print(f"{key}. {title}")
-
-        choice = input("> ").strip()
-
-        if choice == "0":
+        try:
+            raw = Prompts.session.prompt('todol ~ $ ').strip()
+        except KeyboardInterrupt:
             break
 
-        action = actions.get(choice)
-        if action:
-            action[1]()
-        else:
-            print("Invalid selection")
+        if not raw:
+            continue
 
+        parts = raw.split()
+        command, *args = parts
+        command = command.lower()
+
+        func = COMMANDS.get(command)
+
+        if not func:
+            print(f'{command}: command not found')
+            continue
+
+        try:
+            func(args)
+        except IndexError:
+            print('Missing argument')
+        except (SystemExit, KeyboardInterrupt):
+            break
 main()
