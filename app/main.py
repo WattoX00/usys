@@ -1,6 +1,6 @@
 from functions import Functions
 
-from commands import COMMANDS
+from commands import COMMANDS, ALIASES
 
 def main():
     # main loop
@@ -15,6 +15,7 @@ def main():
             continue
 
         command = raw.lower()
+        command = ALIASES.get(command, command)
 
         func = COMMANDS.get(command)
 

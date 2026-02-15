@@ -1,6 +1,5 @@
 from functions import Functions
 
-
 COMMANDS = {
     "adduser": Functions.userAdd,
     "deluser": Functions.deleteUser,
@@ -15,6 +14,7 @@ COMMANDS = {
     "groupinfo": Functions.listGroupInfo,
     "homedir": Functions.getHomeDir,
 }
+
 ALIASES = {
     "au": "adduser",
     "du": "deluser",
