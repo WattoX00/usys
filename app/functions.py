@@ -1,3 +1,4 @@
+# add errorhandling samba setup ; user permission managment ; foldere permissions
 class Functions():
 
     # add a user
@@ -76,14 +77,19 @@ class Functions():
         Functions.executeCmd(cmd)
 
     def groupDel():
-        pass
+        username = Functions.userName()
+        groupName = Functions.groupName()
 
+        groups = ','.join(groupName)
+        cmd = ["sudo", "usermod", "-rG", groups, username]
+
+        Functions.executeCmd(cmd)
 
     #listings
     def listUsers():
         result = Functions.executeCmd(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"], capture=True)
         print(result.stdout)
-    
+
     def listGroups():
         result = Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"], capture=True)
         print(result.stdout)
