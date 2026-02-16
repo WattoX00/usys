@@ -128,3 +128,49 @@ class Functions():
         import subprocess
         return subprocess.run(cmd, check=check, capture_output=capture, text=True)
 
+    # HELP function :)
+    def helpText():
+        print("""
+    USER MANAGEMENT CLI – HELP
+
+    COMMANDS
+    --------
+
+    adduser (au)
+        Create a new user.
+
+    deluser (du)
+        Delete an existing user.
+
+    passwd (pw)
+        Change a user's password.
+
+    appendgroup (ag)
+        Add a user to a group.
+
+    chname (cn)
+        Change the username.
+
+    chshell (cs)
+        Change the user's shell.
+
+    addgroup (ga)
+        Create a new group.
+
+    delgroup (gd)
+        Delete an existing group.
+
+    listuser (lu)
+        List all users.
+
+    listgroups (lg)
+        List all groups.
+
+    groupinfo (gi)
+        Show detailed information about a group.
+
+    homedir (hd)
+        Show the home directory of a user.
+
+       """)
+

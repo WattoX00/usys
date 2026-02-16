@@ -13,6 +13,7 @@ COMMANDS = {
     "listgroups": Functions.listGroups,
     "groupinfo": Functions.listGroupInfo,
     "homedir": Functions.getHomeDir,
+    "help": Functions.helpText,
 }
 
 ALIASES = {
@@ -28,4 +29,5 @@ ALIASES = {
     "lg": "listgroups",
     "gi": "groupinfo",
     "hd": "homedir",
+    "h": "help"
 }
