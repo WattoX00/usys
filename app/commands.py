@@ -31,3 +31,19 @@ ALIASES = {
     "hd": "homedir",
     "h": "help"
 }
+
+# todo : 
+# dividee the app into segments
+
+# lock/unlock user: usermod -L username ; usermod -U username
+
+# set expire: expireuser (eu) ; setexpiry  (se)
+
+# passinfo (pi) ; setpasspolicy (sp)
+
+# addusertogroup (aug) ; removeusergroup  (rug) ; setgroups (sg)
+
+# chuid (cuid) ; chgid (cgid)
+
+# cloneuser (cu)
+

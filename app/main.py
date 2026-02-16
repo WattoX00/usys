@@ -7,7 +7,7 @@ def main():
 
     while True:
         try:
-            raw = str(input('todol ~ $ ')).strip()
+            raw = str(input(' ~ $ ')).strip()
         except KeyboardInterrupt:
             break
 
