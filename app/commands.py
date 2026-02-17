@@ -1,19 +1,24 @@
 from functions import Functions
-
+from group_cfg import GroupFunctions
+from user_cfg import UserFunctions
+from help_cfg import HelpFunctions
 COMMANDS = {
-    "adduser": Functions.userAdd,
-    "deluser": Functions.deleteUser,
-    "passwd": Functions.userPassword,
-    "appendgroup": Functions.appendToGroup,
-    "chname": Functions.changeName,
-    "chshell": Functions.changeShell,
-    "addgroup": Functions.groupAdd,
-    "delgroup": Functions.groupDel,
-    "listuser": Functions.listUsers,
-    "listgroups": Functions.listGroups,
-    "groupinfo": Functions.listGroupInfo,
-    "homedir": Functions.getHomeDir,
-    "help": Functions.helpText,
+    # user
+    "adduser": UserFunctions.userAdd,
+    "deluser": UserFunctions.deleteUser,
+    "passwd": UserFunctions.userPassword,
+    "appendgroup": UserFunctions.appendToGroup,
+    "chname": UserFunctions.changeName,
+    "chshell": UserFunctions.changeShell,
+    # group
+    "addgroup": GroupFunctions.groupAdd,
+    "delgroup": GroupFunctions.groupDel,
+    #list
+    "listuser": HelpFunctions.listUsers,
+    "listgroups": HelpFunctions.listGroups,
+    "groupinfo": HelpFunctions.listGroupInfo,
+    "homedir": HelpFunctions.getHomeDir,
+    "help": HelpFunctions.helpText,
 }
 
 ALIASES = {
