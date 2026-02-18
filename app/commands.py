@@ -2,6 +2,7 @@ from functions import Functions
 from group_cfg import GroupFunctions
 from user_cfg import UserFunctions
 from help_cfg import HelpFunctions
+
 COMMANDS = {
     # user
     "adduser": UserFunctions.userAdd,
@@ -51,10 +52,6 @@ ALIASES = {
 # chuid (cuid) ; chgid (cgid)
 
 # cloneuser (cu)
-
-# group:
-
-# chgroupname (cgn)
 
 
 # add flags
