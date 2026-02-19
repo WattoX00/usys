@@ -52,11 +52,6 @@ class HelpFunctions():
     # HELP function :)
     def helpText():
         print("""
-        Commands (alias):
-        adduser      (au)   deluser      (du)
-        passwd       (pw)   appendgroup  (ag)
-        chname       (cn)   chshell      (cs)
-        addgroup     (ga)   delgroup     (gd)
-        listuser     (lu)   listgroups   (lg)
-        groupinfo    (gi)   homedir      (hd)
+        user
+        group
         """)
