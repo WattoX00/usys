@@ -1,7 +1,6 @@
-from shell import run_shell
-from functions import HelpFunctions
 from group_cfg import GroupFunctions
 from user_cfg import UserFunctions
+from functions import HelpFunctions
 
 USER_COMMANDS = {
     "adduser": UserFunctions.userAdd,
@@ -12,6 +11,7 @@ USER_COMMANDS = {
     "chshell": UserFunctions.changeShell,
     "listusers": HelpFunctions.listUsers,
     "homedir": HelpFunctions.getHomeDir,
+    "help": UserFunctions.helpText,
 }
 
 USER_ALIASES = {
@@ -23,6 +23,7 @@ USER_ALIASES = {
     "cs": "chshell",
     "lu": "listusers",
     "hd": "homedir",
+    "h": "help",
 }
 
 GROUP_COMMANDS = {
@@ -32,6 +33,7 @@ GROUP_COMMANDS = {
     "delgroup": GroupFunctions.groupDel,
     "listgroups": HelpFunctions.listGroups,
     "groupinfo": HelpFunctions.listGroupInfo,
+    "help": GroupFunctions.helpText,
 }
 
 GROUP_ALIASES = {
@@ -41,20 +43,6 @@ GROUP_ALIASES = {
     "gd": "delgroup",
     "lg": "listgroups",
     "gi": "groupinfo",
-}
-
-COMMAND_SETS = {
-    "user": (USER_COMMANDS, USER_ALIASES),
-    "group": (GROUP_COMMANDS, GROUP_ALIASES),
-}
-
-ROOT_COMMANDS = {
-    "user": lambda: run_shell("user ~ $ ", *COMMAND_SETS["user"]),
-    "group": lambda: run_shell("group ~ $ ", *COMMAND_SETS["group"]),
-    "help": HelpFunctions.helpText,
-}
-
-ROOT_ALIASES = {
     "h": "help",
 }
 

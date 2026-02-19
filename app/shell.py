@@ -20,3 +20,4 @@ def run_shell(prompt, commands, aliases):
             continue
 
         func()
+
