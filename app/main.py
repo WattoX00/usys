@@ -15,9 +15,10 @@ def main():
             continue
 
         command = raw.lower()
-        command = ALIASES.get(command, command)
+        
 
-        func = COMMANDS.get(command)
+        command = active_aliases.get(command, command)
+        func = active_commands.get(command)
 
         if not func:
             print(f'{command}: command not found')
