@@ -1,7 +1,6 @@
-from functions import Functions
+from functions import Functions, HelpFunctions
 from group_cfg import GroupFunctions
 from user_cfg import UserFunctions
-from help_cfg import HelpFunctions
 
 # --- USER COMMANDS ---
 USER_COMMANDS = {
@@ -11,6 +10,7 @@ USER_COMMANDS = {
     "appendgroup": UserFunctions.appendToGroup,
     "chname": UserFunctions.changeName,
     "chshell": UserFunctions.changeShell,
+    "listusers": HelpFunctions.listUsers,
 }
 
 USER_ALIASES = {
@@ -20,8 +20,8 @@ USER_ALIASES = {
     "ag": "appendgroup",
     "cn": "chname",
     "cs": "chshell",
+    "lu": "listusers",
 }
-
 
 # --- GROUP COMMANDS ---
 GROUP_COMMANDS = {
@@ -29,6 +29,7 @@ GROUP_COMMANDS = {
     "rmgroup": GroupFunctions.groupRemove,
     "chgroup": GroupFunctions.chGroupName,
     "delgroup": GroupFunctions.groupDel,
+    "listgroups": HelpFunctions.listGroups,
 }
 
 GROUP_ALIASES = {
@@ -36,24 +37,7 @@ GROUP_ALIASES = {
     "gr": "rmgroup",
     "cg": "chgroup",
     "gd": "delgroup",
-}
-
-
-# --- HELP COMMANDS ---
-HELP_COMMANDS = {
-    "listuser": HelpFunctions.listUsers,
-    "listgroups": HelpFunctions.listGroups,
-    "groupinfo": HelpFunctions.listGroupInfo,
-    "homedir": HelpFunctions.getHomeDir,
-    "help": HelpFunctions.helpText,
-}
-
-HELP_ALIASES = {
-    "lu": "listuser",
-    "lg": "listgroups",
-    "gi": "groupinfo",
-    "hd": "homedir",
-    "h": "help",
+    "lg": "listgroups"
 }
 
 
@@ -61,7 +45,6 @@ HELP_ALIASES = {
 COMMAND_SETS = {
     "user": (USER_COMMANDS, USER_ALIASES),
     "group": (GROUP_COMMANDS, GROUP_ALIASES),
-    "help": (HELP_COMMANDS, HELP_ALIASES),
 }
 
 # todo : 

@@ -1,4 +1,4 @@
-from functions import Functions
+from functions import Functions, HelpFunctions
 class UserFunctions():
 
     # add a user
@@ -15,7 +15,7 @@ class UserFunctions():
         # Groups
         groupQ = input(f'Do you want to add ({newUserName}) to a group (Y/n) ').lower()
         if groupQ in ("y", "yes", ""):
-            Functions.listGroups()
+            HelpFunctions.listGroups()
             groups = Functions.groupName()
 
             if len(groups) == 1:
