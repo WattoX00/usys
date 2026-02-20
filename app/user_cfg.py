@@ -71,12 +71,13 @@ class UserFunctions():
     # help text
     def helpText():
         print("""
-        Commands (alias):
-        adduser      (au)
-        deluser      (du)
-        passwd       (pw)
-        chname       (cn)
-        chshell      (cs)
-        listuser     (lu)
-        homedir      (hd)
-        """)
+    Command     Alias   Description
+
+    adduser     (au)    Create a new user
+    deluser     (du)    Delete an existing user
+    passwd      (pw)    Change user password
+    chname      (cn)    Change username
+    chshell     (cs)    Change user shell
+    listuser    (lu)    List all users
+    homedir     (hd)    Change or view home directory
+    """)
