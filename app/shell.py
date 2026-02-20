@@ -9,7 +9,7 @@ def run_shell(prompt, commands, aliases):
         if not raw:
             continue
 
-        if raw == "exit":
+        if raw == 'exit' or raw == 'e':
             return
 
         command = aliases.get(raw, raw)
@@ -20,4 +20,3 @@ def run_shell(prompt, commands, aliases):
             continue
 
         func()
-
