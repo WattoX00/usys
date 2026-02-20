@@ -30,7 +30,8 @@ class GroupFunctions():
         cmd = ["sudo", "groupdel", groupname]
 
         Functions.executeCmd(cmd)
-
+    
+    # Help text
     def helpText():
         print("""
     Command       Alias   Description
@@ -40,4 +41,5 @@ class GroupFunctions():
     delgroup      (gd)    Delete an existing group
     listgroups    (lg)    List all groups
     groupinfo     (gi)    Show detailed group information
+    quit          (q)     Quit the program
     """)
