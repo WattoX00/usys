@@ -13,6 +13,7 @@ USER_COMMANDS = {
     "listusergroups": HelpFunctions.listUserGroups,
     "homedir": HelpFunctions.getHomeDir,
     "help": UserFunctions.helpText,
+    "quit": quit,
 }
 
 USER_ALIASES = {
@@ -26,6 +27,7 @@ USER_ALIASES = {
     "lug": "listusergroups",
     "hd": "homedir",
     "h": "help",
+    "q": "quit",
 }
 
 GROUP_COMMANDS = {
@@ -36,6 +38,7 @@ GROUP_COMMANDS = {
     "listgroups": HelpFunctions.listGroups,
     "groupinfo": HelpFunctions.listGroupInfo,
     "help": GroupFunctions.helpText,
+    "quit": quit,
 }
 
 GROUP_ALIASES = {
@@ -46,18 +49,48 @@ GROUP_ALIASES = {
     "lg": "listgroups",
     "gi": "groupinfo",
     "h": "help",
+    "q": "quit",
 }
     
 def root_help():
     print("""
     Command     Alias   Description
 
-    user        (u)     User management commands
-    group       (g)     Group management commands
+    user        (u)     User management
+    group       (g)     Group management
     help        (h)     Show this help menu
     exit        (q)     Exit the program
     """)
 
+def helpFull():
+    print("""
+    USYS - linux user manager :)
+
+
+    USER COMMANDS
+
+    adduser     (au)  - Create a new user account
+    deluser     (du)  - Remove an existing user account
+    passwd      (pw)  - Change a user's password
+    chname      (cn)  - Modify an existing username
+    chshell     (cs)  - Change the user's default shell
+    listuser    (lu)  - Display all registered users
+    homedir     (hd)  - Show the user's home directory path
+
+    GROUP COMMANDS
+
+    addgroup    (ga)  - Create a new group
+    delgroup    (gd)  - Delete an existing group
+    appendgroup (ag)  - Add a user to an existing group
+    listgroups  (lg)  - Display all groups
+    groupinfo   (gi)  - Show detailed information about a group
+
+    GENERAL
+
+    quit        (q)   - Exit the program
+
+
+""")
 
 # todo :
 
