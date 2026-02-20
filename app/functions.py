@@ -50,9 +50,3 @@ class HelpFunctions():
         groupname = str(input('Group name separated by space: ')).lower().strip()
         return groupname.split(' ')
 
-    # HELP function :)
-    def helpText():
-        print("""
-        user
-        group
-        """)
