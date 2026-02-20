@@ -79,5 +79,6 @@ class UserFunctions():
     chname      (cn)    Change username
     chshell     (cs)    Change user shell
     listuser    (lu)    List all users
-    homedir     (hd)    Change or view home directory
+    homedir     (hd)    View home directory
+    quit        (q)     Quit the program
     """)
