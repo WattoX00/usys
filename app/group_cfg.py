@@ -33,10 +33,11 @@ class GroupFunctions():
 
     def helpText():
         print("""
-        Commands    (alias):
-        appendgroup  (ag)
-        addgroup     (ga)
-        delgroup     (gd)
-        listgroups   (lg)
-        groupinfo    (gi)
-        """)
+    Command       Alias   Description
+
+    appendgroup   (ag)    Add user to an existing group
+    addgroup      (ga)    Create a new group
+    delgroup      (gd)    Delete an existing group
+    listgroups    (lg)    List all groups
+    groupinfo     (gi)    Show detailed group information
+    """)
