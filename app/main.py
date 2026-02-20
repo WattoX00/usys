@@ -1,5 +1,5 @@
 from shell import run_shell
-from commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, root_help, helpFull
+from functions.commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, root_help, helpFull
 
 def main():
     while True:
@@ -12,14 +12,14 @@ def main():
         if not raw:
             continue
 
-        if raw == 'exit' or raw == 'q':
+        if raw == 'exit' or raw == 'q' or raw == 'e':
             break
 
         if raw == 'help' or raw == 'h':
             root_help()
             continue
 
-        if raw == 'helpf' or raw == 'f':
+        if raw == 'helpf' or raw == 'hf':
             helpFull()
             continue
 

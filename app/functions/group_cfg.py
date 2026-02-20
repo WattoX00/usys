@@ -1,4 +1,4 @@
-from functions import Functions
+from functions.functions import Functions
 
 class GroupFunctions():
     # GROUPS

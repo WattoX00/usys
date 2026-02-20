@@ -1,4 +1,4 @@
-from functions import Functions, HelpFunctions
+from functions.functions import Functions, HelpFunctions
 class UserFunctions():
 
     # add a user
