@@ -12,6 +12,7 @@ USER_COMMANDS = {
     "listusers": HelpFunctions.listUsers,
     "listusergroups": HelpFunctions.listUserGroups,
     "homedir": HelpFunctions.getHomeDir,
+    "passinfo": HelpFunctions.passInfo,
     "help": UserFunctions.helpText,
     "quit": quit,
 }
@@ -26,6 +27,7 @@ USER_ALIASES = {
     "lu": "listusers",
     "lug": "listusergroups",
     "hd": "homedir",
+    "pi": "passinfo",
     "h": "help",
     "q": "quit",
 }

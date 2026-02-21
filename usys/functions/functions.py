@@ -22,7 +22,10 @@ class HelpFunctions():
         print(result.stdout)
 
     def passInfo():
-        pass
+        username = Functions.userName()
+        cmd = ["chage", "-l", username]
+
+        print(Functions.executeCmd(cmd, capture=True).stdout)
 
     def getHomeDir():
         username = Functions.userName()
