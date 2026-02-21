@@ -33,6 +33,12 @@ class HelpFunctions():
 
         home = result.stdout.split(":")[5]
         print(home)
+ 
+    def userLocked():
+        username = Functions.userName()
+        cmd = ["passwd", "-S", username]
+
+        print(Functions.executeCmd(cmd, capture=True).stdout)
 
     def listGroups():
         result = Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"], capture=True)

@@ -69,10 +69,16 @@ class UserFunctions():
         Functions.executeCmd(cmd)
 
     def lockUser():
-        pass
+        username = Functions.userName()
+        cmd = ["usermod", "-L", username]
+
+        Functions.executeCmd(cmd)
 
     def unlockUser():
-        pass
+        username = Functions.userName()
+        cmd = ["usermod", "-U", username]
+
+        Functions.executeCmd(cmd)
 
     def setExp():
         pass
