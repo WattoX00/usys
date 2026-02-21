@@ -106,12 +106,6 @@ def helpFull():
 
 # todo :
 
-# setpasspolicy (sp)
-
-# chuid (cuid) ; chgid (cgid)
-
-# cloneuser (cu)
-
 # add flags
 
 # add ssh

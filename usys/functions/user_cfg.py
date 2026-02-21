@@ -100,11 +100,6 @@ class UserFunctions():
 
         Functions.executeCmd(cmd)
 
-    def passExp():
-        pass
-
-    # chage -M <max_days> -m <min_days> -W <warn_days> -I <inactive_days> username
-
     def changeUserId():
         usermod -u new_uid username
         username = Functions.userName()
@@ -112,9 +107,6 @@ class UserFunctions():
         cmd = ["sudo", "usermod", "-u", newid, username]
 
         Functions.executeCmd(cmd)
-
-    def cloneUser():
-        pass
 
     # help text
     def helpText():
