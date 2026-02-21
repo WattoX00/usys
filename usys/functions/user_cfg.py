@@ -52,6 +52,9 @@ class UserFunctions():
 
         Functions.executeCmd(cmd)
 
+    def removeFromGroup():
+        pass
+
     # Change name
     def changeName():
         old = Functions.userName()
@@ -81,7 +84,6 @@ class UserFunctions():
         Functions.executeCmd(cmd)
 
     def setExp():
-        # chage -E YYYY-MM-DD username
         username = Functions.userName()
         date = str(input('Exp day')) # YYYY-MM-DD
         cmd = ["chage", "-E", date, username]
@@ -95,6 +97,14 @@ class UserFunctions():
         Functions.executeCmd(cmd)
 
     def passExp():
+        pass
+
+    # chage -M <max_days> -m <min_days> -W <warn_days> -I <inactive_days> username
+
+    def changeUserId():
+        pass
+
+    def cloneUser():
         pass
 
     # help text

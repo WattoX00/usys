@@ -30,7 +30,7 @@ class GroupFunctions():
         cmd = ["sudo", "groupdel", groupname]
 
         Functions.executeCmd(cmd)
-    
+
     # Help text
     def helpText():
         print("""
