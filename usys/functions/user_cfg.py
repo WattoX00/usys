@@ -81,10 +81,18 @@ class UserFunctions():
         Functions.executeCmd(cmd)
 
     def setExp():
-        pass
+        # chage -E YYYY-MM-DD username
+        username = Functions.userName()
+        date = str(input('Exp day')) # YYYY-MM-DD
+        cmd = ["chage", "-E", date, username]
+
+        Functions.executeCmd(cmd)
 
     def removeExp():
-        pass
+        username = Functions.userName()
+        cmd = ["chage", "-1", username]
+
+        Functions.executeCmd(cmd)
 
     def passExp():
         pass
