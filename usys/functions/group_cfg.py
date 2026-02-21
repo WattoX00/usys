@@ -48,6 +48,8 @@ class GroupFunctions():
     listgroups    (lg)    List all groups
     groupinfo     (gi)    Show detailed group information
     help          (h)     Show help menu
+    helpf         (hf)    Show full help menu
+    exit          (e)     Go back to root
     quit          (q)     Quit the program
     """)
 
@@ -63,5 +65,7 @@ class GroupFunctions():
     groupinfo     (gi)    Show detailed group information
     chgid         (gid)   Change group ID
     help          (h)     Show help menu
+    helpf         (hf)    Show full help menu
+    exit          (e)     Go back to root
     quit          (q)     Quit the program
     """)

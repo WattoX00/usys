@@ -120,6 +120,8 @@ class UserFunctions():
     listusers   (lu)    List all users
     homedir     (hd)    View home directory
     help        (h)     Show help menu
+    helpf       (hf)    Show full help menu
+    exit        (e)     Go back to root
     quit        (q)     Quit the program
     """)
 
@@ -146,5 +148,7 @@ class UserFunctions():
     userlocked        (ul)    Check if user is locked
     userexpday        (ued)   Show user expiration day
     help              (h)     Show help menu
+    helpf             (hf)    Show full help menu
+    exit              (e)     Go back to root
     quit              (q)     Quit the program
     """)
