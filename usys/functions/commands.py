@@ -7,12 +7,14 @@ USER_COMMANDS = {
     "deluser": UserFunctions.deleteUser,
     "passwd": UserFunctions.userPassword,
     "appendgroup": UserFunctions.appendToGroup,
+    "rmfgroup": UserFunctions.removeFromGroup,
     "chname": UserFunctions.changeName,
     "chshell": UserFunctions.changeShell,
     "lockuser": UserFunctions.lockUser,
     "unlockuser": UserFunctions.unlockUser,
     "setexp": UserFunctions.setExp,
     "rmexp": UserFunctions.removeExp,
+    "chuid": UserFunctions.changeUserId,
     "listusers": HelpFunctions.listUsers,
     "listusergroups": HelpFunctions.listUserGroups,
     "homedir": HelpFunctions.getHomeDir,
@@ -20,6 +22,7 @@ USER_COMMANDS = {
     "userlocked": HelpFunctions.userLocked,
     "userexpday": HelpFunctions.userExpDay,
     "help": UserFunctions.helpText,
+    "helpf": UserFunctions.fullHelp,
     "quit": quit,
 }
 
@@ -28,12 +31,14 @@ USER_ALIASES = {
     "du": "deluser",
     "pw": "passwd",
     "ag": "appendgroup",
+    "ar": "rmfgroup",
     "cn": "chname",
     "cs": "chshell",
     "luu": "lockuser",
     "ulu": "unlockuser",
     "se": "setexp",
     "re": "rmexp",
+    "uid": "chuid",
     "lu": "listusers",
     "lug": "listusergroups",
     "hd": "homedir",
@@ -41,6 +46,7 @@ USER_ALIASES = {
     "ul": "userlocked",
     "ued": "userexpday",
     "h": "help",
+    "hf": "helpf",
     "q": "quit",
 }
 
@@ -50,8 +56,10 @@ GROUP_COMMANDS = {
     "chgroup": GroupFunctions.chGroupName,
     "delgroup": GroupFunctions.groupDel,
     "listgroups": HelpFunctions.listGroups,
+    "chgid": GroupFunctions.changeGroupId,
     "groupinfo": HelpFunctions.listGroupInfo,
     "help": GroupFunctions.helpText,
+    "helpf": UserFunctions.fullHelp,
     "quit": quit,
 }
 
@@ -62,10 +70,12 @@ GROUP_ALIASES = {
     "gd": "delgroup",
     "lg": "listgroups",
     "gi": "groupinfo",
+    "gid": "chgid",
     "h": "help",
+    "hf": "helpf",
     "q": "quit",
 }
-    
+
 def root_help():
     print("""
     Command     Alias   Description

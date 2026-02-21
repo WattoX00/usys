@@ -43,10 +43,25 @@ class GroupFunctions():
         print("""
     Command       Alias   Description
 
-    appendgroup   (ag)    Add user to an existing group
     addgroup      (ga)    Create a new group
     delgroup      (gd)    Delete an existing group
     listgroups    (lg)    List all groups
     groupinfo     (gi)    Show detailed group information
+    help          (h)     Show help menu
+    quit          (q)     Quit the program
+    """)
+
+    def fulHelp():
+        print("""
+    Command       Alias   Description
+
+    addgroup      (ga)    Create a new group
+    rmgroup       (gr)    Remove group
+    chgroup       (cg)    Change group name
+    delgroup      (gd)    Delete group permanently
+    listgroups    (lg)    List all groups
+    groupinfo     (gi)    Show detailed group information
+    chgid         (gid)   Change group ID
+    help          (h)     Show help menu
     quit          (q)     Quit the program
     """)
