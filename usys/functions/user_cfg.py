@@ -106,7 +106,12 @@ class UserFunctions():
     # chage -M <max_days> -m <min_days> -W <warn_days> -I <inactive_days> username
 
     def changeUserId():
-        pass
+        usermod -u new_uid username
+        username = Functions.userName()
+        newid = int(input('New UID: '))
+        cmd = ["sudo", "usermod", "-u", newid, username]
+
+        Functions.executeCmd(cmd)
 
     def cloneUser():
         pass

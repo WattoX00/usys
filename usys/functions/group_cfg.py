@@ -31,6 +31,13 @@ class GroupFunctions():
 
         Functions.executeCmd(cmd)
 
+    def changeGroupId():
+        groupname = Functions.groupName()
+        newid = int(input('New Group Id: '))
+        cmd = ["sudo", "groupmod", "-g", newid, groupname]
+
+        Functions.executeCmd(cmd)
+
     # Help text
     def helpText():
         print("""
