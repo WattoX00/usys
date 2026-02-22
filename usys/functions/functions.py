@@ -106,3 +106,12 @@ class HelpFunctions():
             capture=True
         )
         return result.returncode == 0
+
+    @staticmethod
+    def uidExists(uid):
+        result = Functions.executeCmd(
+            ["getent", "passwd", str(uid)],
+            check=False,
+            capture=True
+        )
+        return bool(result.stdout.strip())

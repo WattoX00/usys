@@ -111,9 +111,21 @@ class UserFunctions():
 
     def changeUserId():
         username = Functions.userName()
-        newid = int(input('New UID: '))
-        cmd = ["sudo", "usermod", "-u", newid, username]
 
+        while True:
+            try:
+                newid = int(input('New UID: '))
+
+                if HelpFunctions.uidExists(newid):
+                    print("UID already exists.")
+                    continue
+
+                break
+
+            except ValueError:
+                print("UID must be a number.")
+
+        cmd = ["sudo", "usermod", "-u", str(newid), username]
         Functions.executeCmd(cmd)
 
     # help text
