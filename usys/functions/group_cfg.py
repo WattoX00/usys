@@ -73,11 +73,29 @@ class GroupFunctions():
                 print(f"Group '{groupname}' deleted.")
 
     def changeGroupId():
-        groupname = Functions.groupName()
-        newid = int(input('New Group Id: '))
-        cmd = ["sudo", "groupmod", "-g", newid, groupname]
+        groupnames = Functions.groupName()
 
-        Functions.executeCmd(cmd)
+        if not groupnames:
+            print("No valid group selected.")
+            return
+
+        groupname = groupnames[0]
+
+        try:
+            newid = int(input("New Group Id: ").strip())
+        except ValueError:
+            print("Invalid GID. Must be a number.")
+            return
+
+        if HelpFunctions.uidExists(newid):
+            print("That GID is already in use.")
+            return
+
+        cmd = ["sudo", "groupmod", "-g", str(newid), groupname]
+        result = Functions.executeCmd(cmd)
+
+        if result:
+            print(f"GID of '{groupname}' changed to {newid}.")
 
     # Help text
     def helpText():
