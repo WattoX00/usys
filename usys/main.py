@@ -6,11 +6,11 @@ def main():
     session = PromptSession()
 
     root_commands = [
-        "exit", "q", "e",
-        "help", "h",
-        "helpf", "hf",
-        "user", "u",
-        "group", "g"
+        "exit",
+        "help",
+        "helpf",
+        "user",
+        "group",
     ]
 
     completer = DictCompleter({}, root_commands)

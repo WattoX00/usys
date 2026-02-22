@@ -7,7 +7,7 @@ def run_shell(prompt, commands, aliases):
 
     completer = DictCompleter(
         commands,
-        extra_commands=["exit", "e"]
+        extra_commands=["exit"]
     )
 
     while True:
