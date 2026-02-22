@@ -1,18 +1,46 @@
 class Functions():
 
-    def userName():
-        HelpFunctions.listUsers()
-        username = str(input('User name: ')).lower().strip()
-        return username
+    @staticmethod
+    def userName(must_exist=True):
+        while True:
+            HelpFunctions.listUsers()
+            username = input('User name: ').lower().strip()
+
+            if not username:
+                print("Username cannot be empty.")
+                continue
+
+            if must_exist and not HelpFunctions.userExists(username):
+                print("User does not exist.")
+                continue
+
+            if not must_exist and HelpFunctions.userExists(username):
+                print("User already exists.")
+                continue
+
+            return username
 
     def groupName():
         HelpFunctions.listGroups()
         groupname = str(input('Group name: ')).lower().strip()
         return groupname
 
+    @staticmethod
     def executeCmd(cmd, check=True, capture=False):
         import subprocess
-        return subprocess.run(cmd, check=check, capture_output=capture, text=True)
+        try:
+            result = subprocess.run(
+                cmd,
+                check=check,
+                capture_output=capture,
+                text=True
+            )
+            return result
+        except subprocess.CalledProcessError as e:
+            print(f"\n[ERROR] Command failed: {' '.join(cmd)}")
+            print(e.stderr if e.stderr else e)
+        except Exception as e:
+            print(f"\n[UNEXPECTED ERROR] {e}")
 
 class HelpFunctions():
 
@@ -60,4 +88,21 @@ class HelpFunctions():
         cmd = ["groups", username]
 
         print(Functions.executeCmd(cmd, capture=True).stdout)
+ 
+    @staticmethod
+    def userExists(username):
+        result = Functions.executeCmd(
+            ["id", username],
+            check=False,
+            capture=True
+        )
+        return result.returncode == 0
 
+    @staticmethod
+    def groupExists(groupname):
+        result = Functions.executeCmd(
+            ["getent", "group", groupname],
+            check=False,
+            capture=True
+        )
+        return result.returncode == 0
