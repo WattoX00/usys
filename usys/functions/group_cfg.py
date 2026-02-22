@@ -4,7 +4,7 @@ class GroupFunctions():
     # GROUPS
  
     def groupAdd():
-        groupnames = Functions.groupName()
+        groupnames = Functions.groupName(must_exist=False)
 
         if not groupnames:
             print("No valid group names provided.")
@@ -30,8 +30,8 @@ class GroupFunctions():
         cmd = ["sudo", "usermod", "-rG", groups, username]
         result = Functions.executeCmd(cmd)
 
-    if result:
-        print(f"Removed {groups} from {username}.")
+        if result:
+            print(f"Removed {groups} from {username}.")
 
     def chGroupName():
         groupnames = Functions.groupName()

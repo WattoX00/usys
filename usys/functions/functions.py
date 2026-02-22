@@ -21,7 +21,7 @@ class Functions():
             return username
 
     @staticmethod
-    def groupName():
+    def groupName(must_exist=True):
         HelpFunctions.listGroups()
         group_input = input('Group name(s) (comma separated): ').strip().lower()
 
@@ -29,13 +29,20 @@ class Functions():
             return []
 
         groups = [g.strip() for g in group_input.split(",") if g.strip()]
-
         valid_groups = []
+
         for g in groups:
-            if HelpFunctions.groupExists(g):
-                valid_groups.append(g)
-            else:
+            exists = HelpFunctions.groupExists(g)
+
+            if must_exist and not exists:
                 print(f"Group '{g}' does not exist.")
+                continue
+
+            if not must_exist and exists:
+                print(f"Group '{g}' already exists.")
+                continue
+
+            valid_groups.append(g)
 
         return valid_groups
 
