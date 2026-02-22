@@ -103,31 +103,33 @@ class GroupFunctions:
     # Help text
     def helpText():
         print("""
-    Command       Alias   Description
+    Command        Alias   Description
 
-    addgroup      (ga)    Create a new group
-    delgroup      (gd)    Delete an existing group
-    listgroups    (lg)    List all groups
-    groupinfo     (gi)    Show detailed group information
-    help          (h)     Show help menu
-    helpf         (hf)    Show full help menu
-    exit          (e)     Go back to root
-    quit          (q)     Quit the program
+    addgroup       (ga)    Create a new group
+    delgroup       (gd)    Delete an existing group
+    listgroups     (lg)    List all groups
+    groupinfo      (gi)    Show detailed group information
+
+    help           (h)     Show help menu
+    helpf          (hf)    Show full help menu
+    quit           (q)     Quit the program
     """)
 
     def fullHelp():
         print("""
-    Command       Alias   Description
+               GROUP MANAGEMENT
+    addgroup        (ga)    Create a new group
+    rmgroup         (gr)    Remove group (soft removal)
+    delgroup        (gd)    Delete group permanently
+    chgroup         (cg)    Change group name
+    chgid           (gid)   Change group ID
 
-    addgroup      (ga)    Create a new group
-    rmgroup       (gr)    Remove group
-    chgroup       (cg)    Change group name
-    delgroup      (gd)    Delete group permanently
-    listgroups    (lg)    List all groups
-    groupinfo     (gi)    Show detailed group information
-    chgid         (gid)   Change group ID
-    help          (h)     Show help menu
-    helpf         (hf)    Show full help menu
-    exit          (e)     Go back to root
-    quit          (q)     Quit the program
+            INFORMATION & LISTING
+    listgroups      (lg)    List all groups
+    groupinfo       (gi)    Show detailed group information
+
+                 HELP & EXIT
+    help            (h)     Show help menu
+    helpf           (hf)    Show full help menu
+    quit            (q)     Quit the program
     """)

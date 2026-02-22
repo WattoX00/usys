@@ -1,4 +1,4 @@
-from .shell import run_shell
+from .shell.shell import run_shell
 from .functions.commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, root_help, helpFull
 
 def main():
