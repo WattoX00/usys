@@ -75,56 +75,94 @@ class Functions():
             print(f"\n[UNEXPECTED ERROR] {e}")
             return None
 
-class HelpFunctions():
+class HelpFunctions:
 
-    #listings
+    @staticmethod
     def listUsers():
-        result = Functions.executeCmd(["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"], capture=True)
+        result = Functions.executeCmd(
+            ["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"],
+            capture=True
+        )
         if result and result.stdout:
-            print(result.stdout)
+            print(result.stdout.strip())
 
+    @staticmethod
     def passInfo():
         username = Functions.userName()
         cmd = ["chage", "-l", username]
 
-        print(Functions.executeCmd(cmd, capture=True).stdout)
+        result = Functions.executeCmd(cmd, capture=True)
+        if result and result.stdout:
+            print(result.stdout.strip())
 
+    @staticmethod
     def getHomeDir():
         username = Functions.userName()
-        result = Functions.executeCmd(["getent", "passwd", username], capture=True)
+        result = Functions.executeCmd(
+            ["getent", "passwd", username],
+            capture=True
+        )
 
-        home = result.stdout.split(":")[5]
-        print(home)
- 
+        if result and result.stdout:
+            parts = result.stdout.strip().split(":")
+            if len(parts) > 5:
+                print(parts[5])
+
+    @staticmethod
     def userLocked():
         username = Functions.userName()
         cmd = ["passwd", "-S", username]
 
-        print(Functions.executeCmd(cmd, capture=True).stdout)
+        result = Functions.executeCmd(cmd, capture=True)
+        if result and result.stdout:
+            print(result.stdout.strip())
 
+    @staticmethod
     def userExpDay():
         username = Functions.userName()
-        result = Functions.executeCmd(["bash", "-c", f"chage -l {username} | grep 'Account expires'"], capture=True)
-        if result and result.stdout:
-            print(result.stdout)
+        result = Functions.executeCmd(
+            ["chage", "-l", username],
+            capture=True
+        )
 
+        if result and result.stdout:
+            for line in result.stdout.splitlines():
+                if "Account expires" in line:
+                    print(line.strip())
+
+    @staticmethod
     def listGroups():
-        result = Functions.executeCmd(["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"], capture=True)
+        result = Functions.executeCmd(
+            ["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"],
+            capture=True
+        )
         if result and result.stdout:
-            print(result.stdout)
+            print(result.stdout.strip())
 
+    @staticmethod
     def listGroupInfo():
-        groupname = Functions.groupName()
-        cmd = ["getent", "group", groupname]
+        groupnames = Functions.groupName(must_exist=True)
 
-        print(Functions.executeCmd(cmd, capture=True).stdout)
+        if not groupnames:
+            print("No valid group selected.")
+            return
 
+        for groupname in groupnames:
+            cmd = ["getent", "group", groupname]
+            result = Functions.executeCmd(cmd, capture=True)
+
+            if result and result.stdout:
+                print(result.stdout.strip())
+
+    @staticmethod
     def listUserGroups():
         username = Functions.userName()
         cmd = ["groups", username]
 
-        print(Functions.executeCmd(cmd, capture=True).stdout)
- 
+        result = Functions.executeCmd(cmd, capture=True)
+        if result and result.stdout:
+            print(result.stdout.strip())
+
     @staticmethod
     def userExists(username):
         result = Functions.executeCmd(
@@ -132,7 +170,8 @@ class HelpFunctions():
             check=False,
             capture=True
         )
-        return result.returncode == 0
+        return result is not None and result.returncode == 0
+
 
     @staticmethod
     def groupExists(groupname):
@@ -141,13 +180,22 @@ class HelpFunctions():
             check=False,
             capture=True
         )
-        return result.returncode == 0
+        return result is not None and result.returncode == 0
 
     @staticmethod
     def uidExists(uid):
         result = Functions.executeCmd(
-            ["getent", "passwd", str(uid)],
+            ["bash", "-c", f"getent passwd | awk -F: '$3 == {uid}'"],
             check=False,
             capture=True
         )
-        return bool(result.stdout.strip())
+        return bool(result and result.stdout.strip())
+
+    @staticmethod
+    def gidExists(gid):
+        result = Functions.executeCmd(
+            ["bash", "-c", f"getent group | awk -F: '$3 == {gid}'"],
+            check=False,
+            capture=True
+        )
+        return bool(result and result.stdout.strip())
