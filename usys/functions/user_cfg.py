@@ -220,45 +220,50 @@ class UserFunctions:
     # help text
     def helpText():
         print("""
-    Command     Alias   Description
+    Command       Alias   Description
 
-    adduser     (au)    Create a new user
-    deluser     (du)    Delete an existing user
-    passwd      (pw)    Change user password
-    chname      (cn)    Change username
-    chshell     (cs)    Change user shell
-    listusers   (lu)    List all users
-    homedir     (hd)    View home directory
-    help        (h)     Show help menu
-    helpf       (hf)    Show full help menu
-    exit        (e)     Go back to root
-    quit        (q)     Quit the program
+    adduser       (au)    Create a new user
+    deluser       (du)    Delete an existing user
+    passwd        (pw)    Change user password
+    chname        (cn)    Change username
+    chshell       (cs)    Change user shell
+
+    listusers     (lu)    List all users
+    homedir       (hd)    View home directory
+
+    help          (h)     Show help menu
+    helpf         (hf)    Show full help menu
+    quit          (q)     Quit the program
     """)
 
     def fullHelp():
         print("""
-    Command           Alias   Description
+                USER MANAGEMENT
+    adduser         (au)    Create a new user
+    deluser         (du)    Delete an existing user
+    chname          (cn)    Change username
+    chuid           (uid)   Change user ID
+    chshell         (cs)    Change user shell
+    passwd          (pw)    Change user password
+    lockuser        (luu)   Lock user account
+    unlockuser      (ulu)   Unlock user account
+    setexp          (se)    Set account expiration date
+    rmexp           (re)    Remove account expiration
+    appendgroup     (ag)    Add user to an existing group
+    rmfgroup        (ar)    Remove user from a group
 
-    adduser           (au)    Create a new user
-    deluser           (du)    Delete an existing user
-    passwd            (pw)    Change user password
-    appendgroup       (ag)    Add user to an existing group
-    rmfgroup          (ar)    Remove user from a group
-    chname            (cn)    Change username
-    chshell           (cs)    Change user shell
-    lockuser          (luu)   Lock user account
-    unlockuser        (ulu)   Unlock user account
-    setexp            (se)    Set account expiration date
-    rmexp             (re)    Remove account expiration
-    chuid             (uid)   Change user ID
-    listusers         (lu)    List all users
-    listusergroups    (lug)   List groups of a user
-    homedir           (hd)    View home directory
-    passinfo          (pi)    Show password information
-    userlocked        (ul)    Check if user is locked
-    userexpday        (ued)   Show user expiration day
-    help              (h)     Show help menu
-    helpf             (hf)    Show full help menu
-    exit              (e)     Go back to root
-    quit              (q)     Quit the program
+              INFORMATION & LISTING
+    listusers       (lu)    List all users
+    listusergroups  (lug)   List groups of a user
+    homedir         (hd)    View home directory
+    passinfo        (pi)    Show password information
+    userlocked      (ul)    Check if user is locked
+    userexpday      (ued)   Show user expiration day
+    iduser          (idu)   Show user ID information
+    getentuser      (gu)    Get user entry information
+
+                  HELP & EXIT
+    help            (h)     Show help menu
+    helpf           (hf)    Show full help menu
+    quit            (q)     Quit the program
     """)
