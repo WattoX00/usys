@@ -1,4 +1,5 @@
 from .functions import Functions, HelpFunctions
+from datetime import datetime
 class UserFunctions():
 
     # add a user
@@ -89,9 +90,17 @@ class UserFunctions():
 
     def setExp():
         username = Functions.userName()
-        date = str(input('Exp day')) # YYYY-MM-DD
-        cmd = ["sudo", "chage", "-E", date, username]
 
+        while True:
+            date = input('Exp day (YYYY-MM-DD): ').strip()
+
+            try:
+                datetime.strptime(date, "%Y-%m-%d")
+                break
+            except ValueError:
+                print("Invalid date format. Use YYYY-MM-DD.")
+
+        cmd = ["sudo", "chage", "-E", date, username]
         Functions.executeCmd(cmd)
 
     def removeExp():
