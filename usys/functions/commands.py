@@ -82,11 +82,21 @@ GROUP_ALIASES = {
 }
 
 SSH_COMMANDS = {
-
+    "install": SSHFunctions.installOpenSSH,
+    "enable": SSHFunctions.enableService,
+    "genkey": SSHFunctions.generateKey,
+    "setup": SSHFunctions.setup,
+    "quit": quit,
 }
 
 SSH_ALIASES = {
+    "i": "install",
+    "e": "enable",
+    "gk": "genkey",
+    "s": "setup",
+    "q": "quit",
 }
+
 
 def root_help():
     print("""
@@ -94,6 +104,7 @@ def root_help():
 
     user        (u)     User management
     group       (g)     Group management
+    ssh         (s)     SSH setup
     help        (h)     Show this help menu
     exit        (q)     Exit the program
     """)
