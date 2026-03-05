@@ -94,18 +94,7 @@ class SSHFunctions:
         Functions.executeCmd(["sudo", "chmod", "700", ssh_dir])
         Functions.executeCmd(["sudo", "chown", f"{username}:{username}", ssh_dir])
 
-        cmd = [
-            "sudo",
-            "-u",
-            username,
-            "ssh-keygen",
-            "-t",
-            "ed25519",
-            "-f",
-            key_path,
-            "-N",
-            ""
-        ]
+        cmd = ["sudo", "-u", username, "ssh-keygen", "-t", "ed25519", "-f", key_path, "-N"]
 
         result = Functions.executeCmd(cmd)
 
