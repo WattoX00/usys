@@ -1,6 +1,7 @@
 from .group_cfg import GroupFunctions
 from .user_cfg import UserFunctions
 from .functions import HelpFunctions
+from .ssh_cfg import SSHFunctions
 
 USER_COMMANDS = {
     "adduser": UserFunctions.userAdd,
@@ -85,7 +86,6 @@ SSH_COMMANDS = {
 }
 
 SSH_ALIASES = {
-    
 }
 
 def root_help():
