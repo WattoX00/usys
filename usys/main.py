@@ -55,7 +55,7 @@ def main():
             continue
 
         if raw in ('samba', 'ss'):
-            run_shell('usys ssh ~ $ ', SAMBA_COMMANDS, SAMBA_ALIASES)
+            run_shell('usys samba ~ $ ', SAMBA_COMMANDS, SAMBA_ALIASES)
             continue
 
         print(f"{raw}: command not found")

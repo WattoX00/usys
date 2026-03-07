@@ -6,27 +6,65 @@ class SambaFunctions:
     SAMBA_CONF = "/etc/samba/smb.conf"
     SHARE_BASE = "/srv/samba"
 
-    @staticmethod
-    def executeCmd(cmd, check=True, capture=False):
-        try:
-            result = subprocess.run(
-                cmd,
-                check=check,
-                capture_output=capture,
-                text=True
-            )
-            if capture:
-                return result.stdout.strip()
-            return True
-        except subprocess.CalledProcessError:
-            return False
 
     @staticmethod
-    def installSamba():
-        print("Installing Samba server...")
-        cmd = ["sudo", "apt", "install", "-y", "samba"]
-        if SambaFunctions.executeCmd(cmd):
-            print("Samba installed successfully.")
+    def detectPackageManager():
+        managers = [
+            ("apt", ["apt-get", "apt"]),
+            ("dnf", ["dnf"]),
+            ("yum", ["yum"]),
+            ("pacman", ["pacman"]),
+            ("zypper", ["zypper"]),
+            ("apk", ["apk"]),
+            ("xbps", ["xbps-install"]),
+            ("eopkg", ["eopkg"]),
+            ("emerge", ["emerge"]),
+            ("nix", ["nix-env"])
+        ]
+
+        for manager, binaries in managers:
+            for binary in binaries:
+                if shutil.which(binary):
+                    return manager
+
+        return None
+
+    @staticmethod
+    def installOpenSSH():
+        manager = SambaFunctions.detectPackageManager()
+
+        if not manager:
+            print("No supported package manager detected.")
+            return
+
+
+        commands = {
+            "apt": ["sudo", "apt-get", "update"],
+            "dnf": ["sudo", "dnf", "install", "-y", "samba"],
+            "yum": ["sudo", "yum", "install", "-y", "samba"],
+            "pacman": ["sudo", "pacman", "-Sy", "--noconfirm", "samba"],
+            "zypper": ["sudo", "zypper", "install", "-y", "samba"],
+            "apk": ["sudo", "apk", "add", "samba"],
+            "xbps": ["sudo", "xbps-install", "-Sy", "samba"],
+            "eopkg": ["sudo", "eopkg", "install", "-y", "samba"],
+            "emerge": ["sudo", "emerge", "net-fs/samba"],
+            "nix": ["nix-env", "-iA", "nixpkgs.samba"]
+        }
+
+        if manager == "apt":
+            if not Functions.executeCmd(commands["apt"]):
+                return
+            cmd = ["sudo", "apt-get", "install", "-y", "samba"]
+        else:
+            cmd = commands.get(manager)
+
+        if not cmd:
+            print("Unsupported package manager.")
+            return
+
+        if Functions.executeCmd(cmd):
+            print("OpenSSH installed successfully.")
+
 
     @staticmethod
     def startSamba():
