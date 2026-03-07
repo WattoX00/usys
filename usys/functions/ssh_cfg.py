@@ -197,18 +197,24 @@ class SSHFunctions:
 
     @staticmethod
     def helptext():
-
         print("""
-SSH Command Help
+                   SSH MANAGEMENT
+        install         (i)     Install OpenSSH server
+        enable          (e)     Enable and start SSH service
+        setup           (s)     Run full SSH setup
 
-install        -> Install OpenSSH server
-enable         -> Enable and start SSH service
-generate-key   -> Generate new SSH key for a user
-list-keys      -> List existing SSH keys
-github         -> Setup GitHub SSH key
-test           -> Test SSH connection to GitHub
-help           -> Show this help message
-""")
+                  SSH KEY MANAGEMENT
+        genkey          (gk)    Generate new SSH key
+        listkeys        (lk)    List existing SSH keys
+
+                 GITHUB INTEGRATION
+        github          (gh)    Setup GitHub SSH key
+        test            (t)     Test SSH connection to GitHub
+
+                    HELP & EXIT
+        help            (h)     Show help menu
+        quit            (q)     Quit the program
+        """)
 
     @staticmethod
     def setup():
