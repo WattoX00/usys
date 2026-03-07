@@ -211,48 +211,51 @@ class ApacheFunctions:
         if distro in ["ubuntu", "debian"]:
             service = "apache2"
             config_test = "apache2ctl"
+            doc_root = "/var/www"
             has_a2ensite = True
         elif distro in ["arch", "manjaro"]:
             service = "httpd"
             config_test = "apachectl"
+            doc_root = "/srv/http"
             has_a2ensite = False
         else:  # RHEL, Fedora, CentOS, Rocky, AlmaLinux, etc.
             service = "httpd"
             config_test = "httpd"
+            doc_root = "/var/www"
             has_a2ensite = False
 
-        return service, config_test, has_a2ensite
+        return service, config_test, has_a2ensite, doc_root
 
     @staticmethod
     def apacheStart():
-        service, _, _ = ApacheFunctions.detectServiceAndTools()
+        service, _, _, _ = ApacheFunctions.detectServiceAndTools()
         cmd = ["sudo", "systemctl", "start", service]
         if Functions.executeCmd(cmd):
             print(f"{service} started.")
 
     @staticmethod
     def apacheStop():
-        service, _, _ = ApacheFunctions.detectServiceAndTools()
+        service, _, _, _ = ApacheFunctions.detectServiceAndTools()
         cmd = ["sudo", "systemctl", "stop", service]
         if Functions.executeCmd(cmd):
             print(f"{service} stopped.")
 
     @staticmethod
     def apacheRestart():
-        service, _, _ = ApacheFunctions.detectServiceAndTools()
+        service, _, _, _ = ApacheFunctions.detectServiceAndTools()
         cmd = ["sudo", "systemctl", "restart", service]
         if Functions.executeCmd(cmd):
             print(f"{service} restarted.")
 
     @staticmethod
     def apacheStatus():
-        service, _, _ = ApacheFunctions.detectServiceAndTools()
+        service, _, _, _ = ApacheFunctions.detectServiceAndTools()
         cmd = ["systemctl", "status", service]
         Functions.executeCmd(cmd, check=False)
 
     @staticmethod
     def apacheConfigTest():
-        _, config_tool, _ = ApacheFunctions.detectServiceAndTools()
+        _, config_tool, _, _ = ApacheFunctions.detectServiceAndTools()
         if config_tool in ["apache2ctl", "apachectl"]:
             cmd = ["sudo", config_tool, "configtest"]
         else:  # httpd
@@ -263,12 +266,13 @@ class ApacheFunctions:
 
     @staticmethod
     def apacheCreateTestSite():
+        _, _, _, doc_root = ApacheFunctions.detectServiceAndTools()
         site_name = input("Site name: ").strip().lower()
         if not site_name:
             print("Invalid site name.")
             return
 
-        site_path = f"/var/www/{site_name}"
+        site_path = f"{doc_root}/{site_name}"
         if os.path.exists(site_path):
             print("Site already exists.")
             return
@@ -283,12 +287,13 @@ class ApacheFunctions:
 
     @staticmethod
     def apacheCreateVHost():
+        _, _, has_a2ensite, doc_root = ApacheFunctions.detectServiceAndTools()
         domain = input("Domain: ").strip().lower()
         if not domain:
             print("Invalid domain.")
             return
 
-        docroot = f"/var/www/{domain}"
+        docroot = f"{doc_root}/{domain}"
         config = f"""
 <VirtualHost *:80>
     ServerName {domain}
@@ -304,7 +309,11 @@ class ApacheFunctions:
     CustomLog ${{APACHE_LOG_DIR}}/{domain}_access.log combined
 </VirtualHost>
 """
-        config_path = f"/etc/apache2/sites-available/{domain}.conf"
+        if has_a2ensite:
+            config_path = f"/etc/apache2/sites-available/{domain}.conf"
+        else:
+            config_path = f"/etc/httpd/conf/extra/{domain}.conf"
+
         Functions.executeCmd([
             "sudo", "bash", "-c",
             f"echo '{config}' > {config_path}"
@@ -313,9 +322,9 @@ class ApacheFunctions:
 
     @staticmethod
     def apacheEnableSite():
-        _, _, has_a2ensite = ApacheFunctions.detectServiceAndTools()
+        _, _, has_a2ensite, _ = ApacheFunctions.detectServiceAndTools()
         if not has_a2ensite:
-            print("a2ensite not available on this distro. Enable site manually.")
+            print("a2ensite not available on this distro. Enable site manually in httpd.conf or conf.d.")
             return
         site = input("Site config name (example.conf): ").strip()
         cmd = ["sudo", "a2ensite", site]
@@ -324,9 +333,9 @@ class ApacheFunctions:
 
     @staticmethod
     def apacheDisableSite():
-        _, _, has_a2ensite = ApacheFunctions.detectServiceAndTools()
+        _, _, has_a2ensite, _ = ApacheFunctions.detectServiceAndTools()
         if not has_a2ensite:
-            print("a2dissite not available on this distro. Disable site manually.")
+            print("a2dissite not available on this distro. Disable site manually in httpd.conf or conf.d.")
             return
         site = input("Site config name: ").strip()
         cmd = ["sudo", "a2dissite", site]
