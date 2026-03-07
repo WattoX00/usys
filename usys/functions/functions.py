@@ -1,6 +1,5 @@
 from ..shell.foldercompleter import FolderCompleter
 
-
 class Functions():
 
     @staticmethod
@@ -51,6 +50,8 @@ class Functions():
 
     @staticmethod
     def executeCmd(cmd, check=True, capture=False):
+        import subprocess
+
         try:
             result = subprocess.run(
                 cmd,
@@ -58,11 +59,23 @@ class Functions():
                 capture_output=capture,
                 text=True
             )
-            if capture:
-                return result.stdout.strip()
-            return True
-        except subprocess.CalledProcessError:
-            return False
+            return result
+
+        except subprocess.CalledProcessError as e:
+            print(f"\n[COMMAND FAILED]")
+            print(f"Command: {' '.join(cmd)}")
+            print(f"Exit Code: {e.returncode}")
+            if e.stderr:
+                print(f"Error Output: {e.stderr.strip()}")
+            return None
+
+        except FileNotFoundError:
+            print(f"\n[ERROR] Command not found: {cmd[0]}")
+            return None
+
+        except Exception as e:
+            print(f"\n[UNEXPECTED ERROR] {e}")
+            return None
 
     @staticmethod
     def folder(base_path=None, must_exist=True):
