@@ -128,6 +128,8 @@ SAMBA_COMMANDS = {
     "connections": SambaFunctions.listConnections,
     "perms": SambaFunctions.folderPermissions,
     "files": SambaFunctions.listSharedFiles,
+    "help": SambaFunctions.helptext,
+    "helpf": SambaFunctions.helptextfull,
     "quit": quit,
 }
 
@@ -153,6 +155,8 @@ SAMBA_ALIASES = {
     "con": "connections",
     "p": "perms",
     "f": "files",
+    "h": "help",
+    "hf": "helpf",
     "q": "quit",
 }
 
@@ -162,8 +166,8 @@ def root_help():
 
     user        (u)     User management
     group       (g)     Group management
-    ssh         (s)     SSH setup
-    samba       (ss)    Samba setup
+    ssh         (ss)     SSH setup
+    samba       (sa)    Samba setup
     help        (h)     Show this help menu
     exit        (q)     Exit the program
     """)
@@ -200,6 +204,5 @@ def helpFull():
 
 # add flags
 
-# add samba
 # add apache setup
 # add errorhandling ; user permission managment ; foldere permissions

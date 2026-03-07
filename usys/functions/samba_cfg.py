@@ -272,3 +272,62 @@ class SambaFunctions:
         output = Functions.executeCmd(cmd, capture=True)
         if output:
             print(output.stdout.strip())
+
+    @staticmethod
+    def helptext():
+        print("""
+                SAMBA COMMANDS
+        install      (i)       Install Samba server
+        start        (st)      Start Samba service
+        stop         (sp)      Stop Samba service
+        status       (s)       Show service status
+
+                USER MANAGEMENT
+        adduser      (au)      Add Samba user
+        removeuser   (ru)      Remove Samba user
+
+                SHARE MANAGEMENT
+        mkshare      (ms)      Create shared folder
+        rmshare      (rs)      Remove shared folder
+
+                  HELP & EXIT
+        helpf        (hf)      Full help menu
+        quit         (q)       Quit the program
+        """)
+
+    @staticmethod
+    def helptextfull():
+        print("""
+                  SAMBA MANAGEMENT
+        install         (i)     Install Samba server
+        start           (st)    Start Samba service
+        stop            (sp)    Stop Samba service
+        enable          (e)     Enable Samba at boot
+        disable         (d)     Disable Samba at boot
+        restart         (r)     Restart Samba service
+        status          (s)     Show Samba service status
+
+                   USER MANAGEMENT
+        adduser         (au)    Add Samba user
+        removeuser      (ru)    Remove Samba user
+        enableuser      (eu)    Enable Samba user
+        disableuser     (du)    Disable Samba user
+
+                   SHARE MANAGEMENT
+        mkshare         (ms)    Create shared folder
+        rmshare         (rs)    Remove shared folder
+        owner           (o)     Set folder owner and group
+        chmod           (c)     Set folder permissions
+        addconfig       (ac)    Add share configuration
+
+                     INFORMATION
+        shares          (ls)    List configured shares
+        files           (f)     List files in share
+        perms           (p)     Show folder permissions
+        connections     (con)   Show active Samba connections
+        testconf        (tc)    Test Samba configuration
+
+                     HELP & EXIT
+        help            (h)     Show help menu
+        quit            (q)     Quit the program
+        """)
