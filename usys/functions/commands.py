@@ -163,6 +163,7 @@ def root_help():
     user        (u)     User management
     group       (g)     Group management
     ssh         (s)     SSH setup
+    samba       (ss)    Samba setup
     help        (h)     Show this help menu
     exit        (q)     Exit the program
     """)

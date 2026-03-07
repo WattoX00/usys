@@ -30,7 +30,7 @@ class SambaFunctions:
         return None
 
     @staticmethod
-    def installOpenSSH():
+    def installSamba():
         manager = SambaFunctions.detectPackageManager()
 
         if not manager:
