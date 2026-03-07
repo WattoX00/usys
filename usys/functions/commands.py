@@ -160,6 +160,40 @@ SAMBA_ALIASES = {
     "q": "quit",
 }
 
+APACHE_COMMANDS = {
+    "install": ApacheFunctions.installApacheBasic,
+    "extras": ApacheFunctions.installApacheExtras,
+    "start": ApacheFunctions.apacheStart,
+    "stop": ApacheFunctions.apacheStop,
+    "restart": ApacheFunctions.apacheRestart,
+    "status": ApacheFunctions.apacheStatus,
+    "configtest": ApacheFunctions.apacheConfigTest,
+    "testsite": ApacheFunctions.apacheCreateTestSite,
+    "vhost": ApacheFunctions.apacheCreateVHost,
+    "enable": ApacheFunctions.apacheEnableSite,
+    "disable": ApacheFunctions.apacheDisableSite,
+    "accesslog": ApacheFunctions.apacheAccessLog,
+    "errorlog": ApacheFunctions.apacheErrorLog,
+    "quit": quit,
+}
+
+APACHE_ALIASES = {
+    "i": "install",
+    "x": "extras",
+    "st": "start",
+    "sp": "stop",
+    "r": "restart",
+    "ss": "status",
+    "ct": "configtest",
+    "ts": "testsite",
+    "vh": "vhost",
+    "en": "enable",
+    "di": "disable",
+    "al": "accesslog",
+    "el": "errorlog",
+    "q": "quit",
+}
+
 def root_help():
     print("""
     Command     Alias   Description
