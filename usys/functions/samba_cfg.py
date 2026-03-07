@@ -120,13 +120,17 @@ class SambaFunctions:
             print(f"Samba user '{username}' removed.")
 
     @staticmethod
-    def enableSambaUser(username):
+    def enableSambaUser():
+        username = Functions.userName()
+
         cmd = ["sudo", "smbpasswd", "-e", username]
         if Functions.executeCmd(cmd):
             print(f"Samba user '{username}' enabled.")
 
     @staticmethod
-    def disableSambaUser(username):
+    def disableSambaUser():
+        username = Functions.userName()
+
         cmd = ["sudo", "smbpasswd", "-d", username]
         if Functions.executeCmd(cmd):
             print(f"Samba user '{username}' disabled.")
@@ -152,28 +156,53 @@ class SambaFunctions:
             print(f"Folder removed: {path}")
 
     @staticmethod
-    def setFolderOwner(folder, username, group):
+    def setFolderOwner():
+        folder = input("Folder name: ").strip()
+        username = Functions.userName()
+        groups = Functions.groupName()
+
+        group = groups[0] if groups else username
+
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
+
         cmd = ["sudo", "chown", "-R", f"{username}:{group}", path]
+
         if Functions.executeCmd(cmd):
             print(f"Ownership set to {username}:{group}")
 
     @staticmethod
-    def setFolderPermissions(folder, perms):
+    def setFolderPermissions():
+        folder = input("Folder name: ").strip()
+        perms = input("Permissions (example 770): ").strip()
+
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
+
         cmd = ["sudo", "chmod", "-R", perms, path]
+
         if Functions.executeCmd(cmd):
             print(f"Permissions set to {perms}")
 
     @staticmethod
-    def addShareConfig(name, folder, valid_users="", valid_groups="", read_only="no"):
+    def addShareConfig():
+
+        name = input("Share name: ").strip()
+        folder = input("Folder name: ").strip()
+
+        users = Functions.userName()
+        groups = Functions.groupName()
+
+        read_only = input("Read only? (yes/no): ").strip().lower() or "no"
+
+        valid_users = users
+        valid_groups = " ".join(groups)
+
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
         config = f"""
 [{name}]
-   path = {path}
-   browseable = yes
-   read only = {read_only}
+    path = {path}
+    browseable = yes
+    read only = {read_only}
 """
 
         if valid_users:
@@ -191,6 +220,7 @@ class SambaFunctions:
             )
 
             print(f"Share '{name}' added.")
+
             SambaFunctions.restartSamba()
 
         except Exception:

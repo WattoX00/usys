@@ -1,7 +1,4 @@
-from prompt_toolkit import PromptSession
 from prompt_toolkit.completion import Completer, Completion
-from prompt_toolkit.styles import Style
-
 
 class DictCompleter(Completer):
     def __init__(self, commands: dict, extra_commands=None):
