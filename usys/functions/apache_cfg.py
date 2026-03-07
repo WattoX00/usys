@@ -1,4 +1,199 @@
+from .Functions import Functions
+import shutil
+
 class ApacheFunctions:
+
+    @staticmethod
+    def detectPackageManager():
+        managers = [
+            ("apt", ["apt-get", "apt"]),
+            ("dnf", ["dnf"]),
+            ("yum", ["yum"]),
+            ("pacman", ["pacman"]),
+            ("zypper", ["zypper"]),
+            ("apk", ["apk"]),
+            ("xbps", ["xbps-install"]),
+            ("eopkg", ["eopkg"]),
+            ("emerge", ["emerge"]),
+            ("nix", ["nix-env"])
+        ]
+
+        for manager, binaries in managers:
+            for binary in binaries:
+                if shutil.which(binary):
+                    return manager
+
+        return None
+
+
+    @staticmethod
+    def installApacheBasic():
+        manager = ApacheFunctions.detectPackageManager()
+
+        if not manager:
+            print("No supported package manager detected.")
+            return
+
+        packages = {
+            "apt": ["apache2"],
+            "dnf": ["httpd"],
+            "yum": ["httpd"],
+            "pacman": ["apache"],
+            "zypper": ["apache2"],
+            "apk": ["apache2"],
+            "xbps": ["apache"],
+            "eopkg": ["apache"],
+            "emerge": ["www-servers/apache"],
+            "nix": ["nixpkgs.apacheHttpd"]
+        }
+
+        if manager == "apt":
+            if not Functions.executeCmd(["sudo", "apt-get", "update"]):
+                return
+            cmd = ["sudo", "apt-get", "install", "-y"] + packages["apt"]
+
+        elif manager == "pacman":
+            cmd = ["sudo", "pacman", "-Sy", "--noconfirm"] + packages["pacman"]
+
+        elif manager == "apk":
+            cmd = ["sudo", "apk", "add"] + packages["apk"]
+
+        elif manager == "xbps":
+            cmd = ["sudo", "xbps-install", "-Sy"] + packages["xbps"]
+
+        elif manager == "dnf":
+            cmd = ["sudo", "dnf", "install", "-y"] + packages["dnf"]
+
+        elif manager == "yum":
+            cmd = ["sudo", "yum", "install", "-y"] + packages["yum"]
+
+        elif manager == "zypper":
+            cmd = ["sudo", "zypper", "install", "-y"] + packages["zypper"]
+
+        elif manager == "eopkg":
+            cmd = ["sudo", "eopkg", "install", "-y"] + packages["eopkg"]
+
+        elif manager == "emerge":
+            cmd = ["sudo", "emerge"] + packages["emerge"]
+
+        elif manager == "nix":
+            cmd = ["nix-env", "-iA"] + packages["nix"]
+
+        else:
+            print("Unsupported package manager.")
+            return
+
+        if Functions.executeCmd(cmd):
+            print("Apache installed successfully.")
+
+
+    @staticmethod
+    def installApacheExtras():
+        manager = ApacheFunctions.detectPackageManager()
+
+        if not manager:
+            print("No supported package manager detected.")
+            return
+
+        packages = {
+            "apt": [
+                "apache2-utils",
+                "libapache2-mod-php",
+                "certbot",
+                "python3-certbot-apache",
+                "libapache2-mod-security2"
+            ],
+            "dnf": [
+                "httpd-tools",
+                "mod_ssl",
+                "php",
+                "certbot",
+                "python3-certbot-apache",
+                "mod_security"
+            ],
+            "yum": [
+                "httpd-tools",
+                "mod_ssl",
+                "php",
+                "certbot",
+                "python3-certbot-apache",
+                "mod_security"
+            ],
+            "pacman": [
+                "php-apache",
+                "certbot"
+            ],
+            "zypper": [
+                "apache2-utils",
+                "apache2-mod_php",
+                "certbot",
+                "python3-certbot-apache",
+                "apache2-mod_security2"
+            ],
+            "apk": [
+                "apache2-utils",
+                "php82-apache2",
+                "certbot"
+            ],
+            "xbps": [
+                "apache-utils",
+                "php-apache",
+                "certbot"
+            ],
+            "eopkg": [
+                "apache-utils",
+                "php",
+                "certbot"
+            ],
+            "emerge": [
+                "dev-lang/php",
+                "app-crypt/certbot"
+            ],
+            "nix": [
+                "nixpkgs.php",
+                "nixpkgs.certbot"
+            ]
+        }
+
+        if manager == "apt":
+            if not Functions.executeCmd(["sudo", "apt-get", "update"]):
+                return
+            cmd = ["sudo", "apt-get", "install", "-y"] + packages["apt"]
+
+        elif manager == "pacman":
+            cmd = ["sudo", "pacman", "-Sy", "--noconfirm"] + packages["pacman"]
+
+        elif manager == "apk":
+            cmd = ["sudo", "apk", "add"] + packages["apk"]
+
+        elif manager == "xbps":
+            cmd = ["sudo", "xbps-install", "-Sy"] + packages["xbps"]
+
+        elif manager == "dnf":
+            cmd = ["sudo", "dnf", "install", "-y"] + packages["dnf"]
+
+        elif manager == "yum":
+            cmd = ["sudo", "yum", "install", "-y"] + packages["yum"]
+
+        elif manager == "zypper":
+            cmd = ["sudo", "zypper", "install", "-y"] + packages["zypper"]
+
+        elif manager == "eopkg":
+            cmd = ["sudo", "eopkg", "install", "-y"] + packages["eopkg"]
+
+        elif manager == "emerge":
+            cmd = ["sudo", "emerge"] + packages["emerge"]
+
+        elif manager == "nix":
+            cmd = ["nix-env", "-iA"] + packages["nix"]
+
+        else:
+            print("Unsupported package manager.")
+            return
+
+        if Functions.executeCmd(cmd):
+            print("Apache additional packages installed successfully.")
+
     @staticmethod
     def apacheStart():
         cmd = ["sudo", "systemctl", "start", "apache2"]
@@ -111,3 +306,14 @@ class ApacheFunctions:
 
         if Functions.executeCmd(cmd):
             print(f"Site '{site}' disabled.")
+
+    @staticmethod
+    def apacheAccessLog():
+        cmd = ["sudo", "tail", "-n", "50", "/var/log/apache2/access.log"]
+        Functions.executeCmd(cmd)
+
+    @staticmethod
+    def apacheErrorLog():
+        cmd = ["sudo", "tail", "-n", "50", "/var/log/apache2/error.log"]
+        Functions.executeCmd(cmd)
+
