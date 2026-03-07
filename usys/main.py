@@ -50,11 +50,11 @@ def main():
             run_shell('usys group ~ $ ', GROUP_COMMANDS, GROUP_ALIASES)
             continue
 
-        if raw in ('ssh', 's'):
+        if raw in ('ssh', 'ss'):
             run_shell('usys ssh ~ $ ', SSH_COMMANDS, SSH_ALIASES)
             continue
 
-        if raw in ('samba', 'ss'):
+        if raw in ('samba', 'sa'):
             run_shell('usys samba ~ $ ', SAMBA_COMMANDS, SAMBA_ALIASES)
             continue
 
