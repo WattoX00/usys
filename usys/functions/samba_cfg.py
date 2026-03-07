@@ -137,8 +137,7 @@ class SambaFunctions:
 
     @staticmethod
     def createShareFolder():
-        folder = input("Folder name: ").strip()
-
+        folder = Functions.folder("/srv/samba")
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
         if not os.path.exists(path):
@@ -149,7 +148,6 @@ class SambaFunctions:
 
     @staticmethod
     def removeShareFolder():
-
         folder = Functions.folder("/srv/samba")
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
@@ -159,7 +157,7 @@ class SambaFunctions:
 
     @staticmethod
     def setFolderOwner():
-        folder = Functions.folder()
+        folder = Functions.folder("/srv/samba")
         username = Functions.userName()
         groups = Functions.groupName()
 
@@ -174,7 +172,7 @@ class SambaFunctions:
 
     @staticmethod
     def setFolderPermissions():
-        folder = input("Folder name: ").strip()
+        folder = Functions.folder("/srv/samba")
         perms = input("Permissions (example 770): ").strip()
 
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
@@ -188,7 +186,7 @@ class SambaFunctions:
     def addShareConfig():
 
         name = input("Share name: ").strip()
-        folder = input("Folder name: ").strip()
+        folder = Functions.folder("/srv/samba")
 
         users = Functions.userName()
         groups = Functions.groupName()
