@@ -1,11 +1,12 @@
+from .functions import Functions
 import subprocess
 import os
+import shutil
 
 class SambaFunctions:
 
     SAMBA_CONF = "/etc/samba/smb.conf"
     SHARE_BASE = "/srv/samba"
-
 
     @staticmethod
     def detectPackageManager():
@@ -69,37 +70,37 @@ class SambaFunctions:
     @staticmethod
     def startSamba():
         cmd = ["sudo", "systemctl", "start", "smbd"]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print("Samba service started.")
 
     @staticmethod
     def stopSamba():
         cmd = ["sudo", "systemctl", "stop", "smbd"]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print("Samba service stopped.")
 
     @staticmethod
     def enableSamba():
         cmd = ["sudo", "systemctl", "enable", "smbd"]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print("Samba enabled at boot.")
 
     @staticmethod
     def disableSamba():
         cmd = ["sudo", "systemctl", "disable", "smbd"]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print("Samba disabled at boot.")
 
     @staticmethod
     def restartSamba():
         cmd = ["sudo", "systemctl", "restart", "smbd"]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print("Samba restarted.")
 
     @staticmethod
     def sambaStatus():
         cmd = ["systemctl", "status", "smbd"]
-        output = SambaFunctions.executeCmd(cmd, capture=True)
+        output = Functions.executeCmd(cmd, capture=True)
         if output:
             print(output)
 
@@ -107,24 +108,24 @@ class SambaFunctions:
     def addSambaUser(username):
         print(f"Adding samba user: {username}")
         cmd = ["sudo", "smbpasswd", "-a", username]
-        SambaFunctions.executeCmd(cmd, check=False)
+        Functions.executeCmd(cmd, check=False)
 
     @staticmethod
     def removeSambaUser(username):
         cmd = ["sudo", "smbpasswd", "-x", username]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print(f"Samba user '{username}' removed.")
 
     @staticmethod
     def enableSambaUser(username):
         cmd = ["sudo", "smbpasswd", "-e", username]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print(f"Samba user '{username}' enabled.")
 
     @staticmethod
     def disableSambaUser(username):
         cmd = ["sudo", "smbpasswd", "-d", username]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print(f"Samba user '{username}' disabled.")
 
     @staticmethod
@@ -132,7 +133,7 @@ class SambaFunctions:
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
         if not os.path.exists(path):
-            SambaFunctions.executeCmd(["sudo", "mkdir", "-p", path])
+            Functions.executeCmd(["sudo", "mkdir", "-p", path])
             print(f"Folder created: {path}")
         else:
             print("Folder already exists.")
@@ -142,21 +143,21 @@ class SambaFunctions:
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
 
         if os.path.exists(path):
-            SambaFunctions.executeCmd(["sudo", "rm", "-rf", path])
+            Functions.executeCmd(["sudo", "rm", "-rf", path])
             print(f"Folder removed: {path}")
 
     @staticmethod
     def setFolderOwner(folder, username, group):
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
         cmd = ["sudo", "chown", "-R", f"{username}:{group}", path]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print(f"Ownership set to {username}:{group}")
 
     @staticmethod
     def setFolderPermissions(folder, perms):
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
         cmd = ["sudo", "chmod", "-R", perms, path]
-        if SambaFunctions.executeCmd(cmd):
+        if Functions.executeCmd(cmd):
             print(f"Permissions set to {perms}")
 
     @staticmethod
@@ -180,7 +181,7 @@ class SambaFunctions:
             with open("/tmp/samba_share.conf", "w") as f:
                 f.write(config)
 
-            SambaFunctions.executeCmd(
+            Functions.executeCmd(
                 ["sudo", "bash", "-c", f"cat /tmp/samba_share.conf >> {SambaFunctions.SAMBA_CONF}"]
             )
 
@@ -206,14 +207,14 @@ class SambaFunctions:
     @staticmethod
     def testConfig():
         cmd = ["testparm", "-s"]
-        output = SambaFunctions.executeCmd(cmd, capture=True)
+        output = Functions.executeCmd(cmd, capture=True)
         if output:
             print(output)
 
     @staticmethod
     def listConnections():
         cmd = ["sudo", "smbstatus"]
-        output = SambaFunctions.executeCmd(cmd, capture=True)
+        output = Functions.executeCmd(cmd, capture=True)
         if output:
             print(output)
 
@@ -221,7 +222,7 @@ class SambaFunctions:
     def folderPermissions(folder):
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
         cmd = ["ls", "-ld", path]
-        output = SambaFunctions.executeCmd(cmd, capture=True)
+        output = Functions.executeCmd(cmd, capture=True)
         if output:
             print(output)
 
@@ -229,6 +230,6 @@ class SambaFunctions:
     def listSharedFiles(folder):
         path = os.path.join(SambaFunctions.SHARE_BASE, folder)
         cmd = ["ls", "-l", path]
-        output = SambaFunctions.executeCmd(cmd, capture=True)
+        output = Functions.executeCmd(cmd, capture=True)
         if output:
             print(output)
