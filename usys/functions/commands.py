@@ -174,6 +174,8 @@ APACHE_COMMANDS = {
     "disable": ApacheFunctions.apacheDisableSite,
     "accesslog": ApacheFunctions.apacheAccessLog,
     "errorlog": ApacheFunctions.apacheErrorLog,
+    "help": ApacheFunctions.helptext,
+    "helpf": ApacheFunctions.helptextfull,
     "quit": quit,
 }
 
@@ -191,6 +193,8 @@ APACHE_ALIASES = {
     "di": "disable",
     "al": "accesslog",
     "el": "errorlog",
+    "h": "help",
+    "hf": "helpf",
     "q": "quit",
 }
 

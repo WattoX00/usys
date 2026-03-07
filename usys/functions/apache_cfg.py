@@ -317,3 +317,53 @@ class ApacheFunctions:
         cmd = ["sudo", "tail", "-n", "50", "/var/log/apache2/error.log"]
         Functions.executeCmd(cmd)
 
+    @staticmethod
+    def helptext():
+        print("""
+               APACHE COMMANDS
+        install      (i)       Install Apache
+        extras       (x)       Install Apache extras (PHP, Certbot, etc.)
+        start        (st)      Start Apache
+        stop         (sp)      Stop Apache
+        restart      (r)       Restart Apache
+        status       (ss)      Show Apache status
+
+               SITE MANAGEMENT
+        testsite     (ts)      Create simple test website
+        vhost        (vh)      Create VirtualHost
+        enable       (en)      Enable site
+        disable      (di)      Disable site
+
+                 HELP & EXIT
+        helpf        (hf)      Full help menu
+        quit         (q)       Quit the program
+        """)
+
+    @staticmethod
+    def helptextfull():
+        print("""
+                APACHE MANAGEMENT
+        install        (i)     Install Apache server
+        extras         (x)     Install Apache extras (PHP, Certbot, Security)
+        start          (st)    Start Apache
+        stop           (sp)    Stop Apache
+        restart        (r)     Restart Apache
+        status         (ss)    Show Apache service status
+
+                CONFIGURATION
+        configtest     (ct)    Test Apache configuration
+        vhost          (vh)    Create VirtualHost configuration
+
+                SITE MANAGEMENT
+        testsite       (ts)    Create simple test website
+        enable         (en)    Enable site
+        disable        (di)    Disable site
+
+                    LOGS
+        accesslog      (al)    Show last 50 access log lines
+        errorlog       (el)    Show last 50 error log lines
+
+                 HELP & EXIT
+        help           (h)     Show help menu
+        quit           (q)     Quit the program
+        """)
