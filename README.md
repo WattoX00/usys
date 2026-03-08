@@ -12,39 +12,47 @@ clear commands and short aliases.
 - View user and group information
 - Simple command aliases for faster usage
 
-## Main Menu
-```
-Command   Alias   Description
+Disclaimer:
+This program may not always work as intended. Use it at your own risk,
+especially in production environments or large projects.
 
-user      (u)     User management
-group     (g)     Group management
-help      (h)     Show help menu
-exit      (q)     Exit the program
+The program was primarily tested on Arch Linux. Other Linux distributions
+may behave differently.
+
+Most operations require sudo permissions (except for listing functions),
+so make sure you understand what the program does before using it.
+
+Usage:
+Navigate between shells using their commands. For example, type
+'user' or 'u' to enter the user shell mode. Inside each shell you can
+execute commands related to that category. Each shell also provides
+its own help functions.
+
+```bash
+Shells:
+user        (u)     User management
+group       (g)     Group management
+permission  (p)     Permission management
+ssh         (ss)    SSH setup
+samba       (sa)    Samba setup
+apache      (a)     Apache setup
+
+help        (h)     Show the short help menu
+helpf       (hf)    Show this full help menu
+exit        (q)     Exit the program
 ```
 
+Flags (run outside USYS):
+usys --version     Show the installed version
+usys --update      Check for updates and install if available
+usys --helpf       Show this full help message
 
-## User Commands
-```
-Command     Alias   Description
+Documentation and source code:
+https://github.com/WattoX00/usys
+https://pypi.org/project/usys/
 
-adduser     (au)    Create a new user account
-deluser     (du)    Delete an existing user
-passwd      (pw)    Change user password
-chname      (cn)    Change username
-chshell     (cs)    Change user shell
-listuser    (lu)    List all users
-homedir     (hd)    View user's home directory
-quit        (q)     Quit user menu
-```
+If you encounter any issues, please report them here:
+https://github.com/WattoX00/usys/issues
 
-## Group Commands
-```
-Command       Alias   Description
+Thank you for using USYS!
 
-addgroup      (ga)    Create a new group
-delgroup      (gd)    Delete an existing group
-appendgroup   (ag)    Add user to an existing group
-listgroups    (lg)    List all groups
-groupinfo     (gi)    Show detailed group information
-quit          (q)     Quit group menu
-```
