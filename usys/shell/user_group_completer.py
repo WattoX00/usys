@@ -1,8 +1,8 @@
 from prompt_toolkit.completion import Completer, Completion
-from .functions import HelpFunctions
+from ..functions.functions import HelpFunctions
 
 
-class PromptToolkitCompleter(Completer):
+class UserGroupCompleter(Completer):
 
     def __init__(self, mode):
         self.mode = mode

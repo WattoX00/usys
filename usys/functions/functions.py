@@ -2,10 +2,10 @@ class Functions():
 
     @staticmethod
     def userName(must_exist=True):
-        from .user_group_completer import PromptToolkitComplete
         from prompt_toolkit import PromptSession
-
-        session = PromptSession(completer=PromptToolkitCompleter("users"))
+        from ..shell.user_group_completer import UserGroupCompleter
+ 
+        session = PromptSession(completer=UserGroupCompleter("users"))
 
         while True:
             HelpFunctions.listUsers()
@@ -30,9 +30,9 @@ class Functions():
     @staticmethod
     def groupName(must_exist=True):
         from prompt_toolkit import PromptSession
-        from .user_group_completer import PromptToolkitCompleter
+        from .shell.user_group_completer import UserGroupCompleter
 
-        session = PromptSession(completer=PromptToolkitCompleter("groups"))
+        session = PromptSession(completer=UserGroupCompleter("groups"))
 
         while True:
             HelpFunctions.listGroups()
