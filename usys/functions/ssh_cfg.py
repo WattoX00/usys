@@ -183,11 +183,7 @@ class SSHFunctions:
 
         print("Testing GitHub SSH connection...\n")
 
-        Functions.executeCmd([
-            "ssh",
-            "-T",
-            "git@github.com"
-        ], check=False)
+        Functions.executeCmd(["ssh", "-T", "git@github.com"], check=False)
 
     @staticmethod
     def setup():
