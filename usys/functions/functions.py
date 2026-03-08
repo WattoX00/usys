@@ -97,6 +97,18 @@ class Functions():
 
             return folder
 
+    @staticmethod
+    def preHomeDir(username):
+        result = Functions.executeCmd(
+            ["getent", "passwd", username],
+            capture=True
+        )
+
+        if result and result.stdout:
+            parts = result.stdout.strip().split(":")
+            if len(parts) > 5:
+                return (parts[5])
+
 class HelpFunctions:
 
     @staticmethod
@@ -116,18 +128,6 @@ class HelpFunctions:
         result = Functions.executeCmd(cmd, capture=True)
         if result and result.stdout:
             print(result.stdout.strip())
-
-    @staticmethod
-    def preHomeDir(username):
-        result = Functions.executeCmd(
-            ["getent", "passwd", username],
-            capture=True
-        )
-
-        if result and result.stdout:
-            parts = result.stdout.strip().split(":")
-            if len(parts) > 5:
-                return (parts[5])
 
     @staticmethod
     def getHomeDir():

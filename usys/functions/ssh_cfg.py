@@ -1,4 +1,4 @@
-from .functions import Functions, HelpFunctions
+from .functions import Functions
 import os
 import shutil
 
