@@ -86,7 +86,7 @@ class SSHFunctions:
     def generateKey():
         username = Functions.userName()
 
-        home = str(preHomeDir(username))
+        home = Functions.preHomeDir(username)
         ssh_dir = os.path.join(home, ".ssh")
         key_path = os.path.join(ssh_dir, "id_ed25519")
 
@@ -94,13 +94,7 @@ class SSHFunctions:
         Functions.executeCmd(["sudo", "chmod", "700", ssh_dir])
         Functions.executeCmd(["sudo", "chown", f"{username}:{username}", ssh_dir])
 
-        cmd = [
-            "sudo", "-u", username,
-            "ssh-keygen",
-            "-t", "ed25519",
-            "-f", key_path,
-            "-N", ""
-        ]
+        cmd = ["sudo", "-u", username, "ssh-keygen", "-t", "ed25519", "-f", key_path, "-N", ""]
 
         if Functions.executeCmd(cmd):
             print(f"SSH key generated for user '{username}'.")
@@ -109,7 +103,7 @@ class SSHFunctions:
     def listKeys():
 
         username = Functions.userName()
-        ssh_dir = f"/home/{username}/.ssh"
+        ssh_dir = f"{Functions.preHomeDir(username)}/.ssh"
 
         if not os.path.exists(ssh_dir):
             print("No SSH directory found.")
@@ -134,7 +128,7 @@ class SSHFunctions:
     @staticmethod
     def printPublicKey(username, key):
 
-        pub_path = f"/home/{username}/.ssh/{key}.pub"
+        pub_path = f"{Functions.preHomeDir(username)}/.ssh/{key}.pub"
 
         if not os.path.exists(pub_path):
             print("Public key not found.")
@@ -149,7 +143,7 @@ class SSHFunctions:
     def setupGithubSSH():
 
         username = Functions.userName()
-        ssh_dir = f"/home/{username}/.ssh"
+        ssh_dir = f"{Functions.preHomeDir(username)}/.ssh"
 
         if not os.path.exists(ssh_dir):
             print("No SSH keys found. Generating one...")
