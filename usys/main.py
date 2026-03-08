@@ -16,10 +16,11 @@ def parse_args():
         description=f"{UsysVersion.version()}\nLinux User Manager :)",
         formatter_class=argparse.RawTextHelpFormatter
     )
+    parser.add_argument("-hf", "--helpf", action="store_true", help="show full help message and exit")
 
     info = parser.add_argument_group("Information")
-    info.add_argument("-u", "--update", action="store_true", help="Update usys with pipx")
-    info.add_argument("-v", "--version", action="store_true", help="Show version")
+    info.add_argument("-u", "--update", action="store_true", help="update usys with pipx")
+    info.add_argument("-v", "--version", action="store_true", help="show version and exit")
 
     return parser.parse_args()
 
@@ -28,6 +29,10 @@ def main():
 
     args = parse_args()
  
+    if args.helpf:
+        helpFull()
+        return
+
     if args.update:
         UsysUpdate.update()
         return

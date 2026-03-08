@@ -252,9 +252,10 @@ def root_help():
     """)
 
 def helpFull():
+    from ..flags.version import UsysVersion
     print(f"""
     USYS - Linux user manager :)
-    Version {Version.version()}
+    Version {UsysVersion.version()}
 
     Disclaimer:
     This program may not always work as intended. Use it at your own risk,
