@@ -1,6 +1,6 @@
 from .shell.shell import run_shell
 from .shell.dictcompleter import DictCompleter
-from .functions.commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, SSH_COMMANDS, SSH_ALIASES, SAMBA_COMMANDS, SAMBA_ALIASES, APACHE_COMMANDS, APACHE_ALIASES, root_help, helpFull
+from .functions.commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, PERMISSION_COMMANDS, PERMISSION_ALIASES, SSH_COMMANDS, SSH_ALIASES, SAMBA_COMMANDS, SAMBA_ALIASES, APACHE_COMMANDS, APACHE_ALIASES, root_help, helpFull
 from prompt_toolkit import PromptSession
 
 def main():
@@ -12,6 +12,7 @@ def main():
         "helpf",
         "user",
         "group",
+        "permission",
         "ssh",
         "samba",
         "apache",
@@ -49,6 +50,10 @@ def main():
 
         if raw in ('group', 'g'):
             run_shell('usys group ~ $ ', GROUP_COMMANDS, GROUP_ALIASES)
+            continue
+
+        if raw in ('permission', 'p'):
+            run_shell('usys permission ~ $ ', PERMISSION_COMMANDS, PERMISSION_ALIASES)
             continue
 
         if raw in ('ssh', 'ss'):
