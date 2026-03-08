@@ -26,7 +26,6 @@ class Functions():
 
             return username
 
-
     @staticmethod
     def groupName(must_exist=True):
         from prompt_toolkit import PromptSession

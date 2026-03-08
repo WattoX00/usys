@@ -124,7 +124,8 @@ class UserFunctions:
     def changeShell():
         try:
             username = Functions.userName(must_exist=True)
-            shellname = input('Change shell full path (/bin/bash): ').strip()
+            print('Change shell full path (/bin/bash)')
+            shellname = Functions.folder('/bin')
 
             if not os.path.isfile(shellname):
                 print("Shell path does not exist.")
