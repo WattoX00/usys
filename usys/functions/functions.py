@@ -112,13 +112,21 @@ class Functions():
 class HelpFunctions:
 
     @staticmethod
-    def listUsers():
+    def getUsers():
         result = Functions.executeCmd(
             ["bash", "-c", "getent passwd | awk -F: '$3 >= 1000 {print $1}'"],
             capture=True
         )
         if result and result.stdout:
-            print(result.stdout.strip())
+            return result.stdout.strip().split("\n")
+        return []
+
+    @staticmethod
+    def listUsers():
+        users = HelpFunctions.getUsers()
+        if users:
+            print("\n".join(users))
+
 
     @staticmethod
     def passInfo():
@@ -179,13 +187,20 @@ class HelpFunctions:
             print(result.stdout.strip())
 
     @staticmethod
-    def listGroups():
+    def getGroups():
         result = Functions.executeCmd(
             ["bash", "-c", "getent group | awk -F: '$3 >= 1000 || $1 ~ /^(sudo|wheel|docker)$/ {print $1}'"],
             capture=True
         )
         if result and result.stdout:
-            print(result.stdout.strip())
+            return result.stdout.strip().split("\n")
+        return []
+
+    @staticmethod
+    def listGroups():
+        groups = HelpFunctions.getGroups()
+        if groups:
+            print("\n".join(groups))
 
     @staticmethod
     def listGroupInfo():

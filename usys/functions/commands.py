@@ -242,6 +242,7 @@ def root_help():
 
     user        (u)     User management
     group       (g)     Group management
+    permission  (p)     Permission managment
     ssh         (ss)    SSH setup
     samba       (sa)    Samba setup
     apache      (a)     Apache setup
