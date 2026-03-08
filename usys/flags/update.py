@@ -5,8 +5,8 @@ from importlib.metadata import version, PackageNotFoundError
 
 PACKAGE_NAME = "usys"
 
-class Upgrade():
-    def upgrade():
+class UsysUpdate():
+    def update():
         try:
             installed_version = version(PACKAGE_NAME)
         except PackageNotFoundError:

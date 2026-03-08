@@ -4,7 +4,7 @@ from importlib.metadata import version, PackageNotFoundError
 
 PACKAGE_NAME = "usys"
 
-class Version():
+class UsysVersion():
     def version():
         try:
             installed_version = version(PACKAGE_NAME)

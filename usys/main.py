@@ -29,7 +29,7 @@ def main():
     args = parse_args()
  
     if args.update:
-        Update.upgrade()
+        Update.update()
         return
 
     if args.version:
