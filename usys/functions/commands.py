@@ -96,6 +96,8 @@ PERMISSION_COMMANDS = {
     "rchmod": PermissionFunctions.recursivePermissions,
     "rchown": PermissionFunctions.recursiveOwner,
     "rchgrp": PermissionFunctions.recursiveGroup,
+    "help": PermissionFunctions.helptext,
+    "helpf": PermissionFunctions.helptext,
     "quit": quit,
 }
 
@@ -111,6 +113,8 @@ PERMISSION_ALIASES = {
     "rc": "rchmod",
     "rco": "rchown",
     "rcg": "rchgrp",
+    "h": "help",
+    "hf": "helpf",
     "q": "quit",
 }
 
@@ -122,6 +126,7 @@ SSH_COMMANDS = {
     "github": SSHFunctions.setupGithubSSH,
     "test": SSHFunctions.testConnection,
     "help": SSHFunctions.helptext,
+    "helpf": SSHFunctions.helptext,
     "setup": SSHFunctions.setup,
     "quit": quit,
 }
@@ -134,6 +139,7 @@ SSH_ALIASES = {
     "gh": "github",
     "t": "test",
     "h": "help",
+    "hf": "helpf",
     "s": "setup",
     "q": "quit",
 }
