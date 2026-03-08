@@ -118,6 +118,18 @@ class HelpFunctions:
             print(result.stdout.strip())
 
     @staticmethod
+    def preHomeDir(username):
+        result = Functions.executeCmd(
+            ["getent", "passwd", username],
+            capture=True
+        )
+
+        if result and result.stdout:
+            parts = result.stdout.strip().split(":")
+            if len(parts) > 5:
+                return (parts[5])
+
+    @staticmethod
     def getHomeDir():
         username = Functions.userName()
         result = Functions.executeCmd(

@@ -1,4 +1,4 @@
-from .functions import Functions
+from .functions import Functions, HelpFunctions
 import os
 import shutil
 
@@ -86,7 +86,7 @@ class SSHFunctions:
     def generateKey():
         username = Functions.userName()
 
-        home = f"/home/{username}"
+        home = str(preHomeDir(username))
         ssh_dir = os.path.join(home, ".ssh")
         key_path = os.path.join(ssh_dir, "id_ed25519")
 
