@@ -300,7 +300,6 @@ def helpFull():
     Thank you for using USYS!
     """)
 
-# todo :
-
-# add flags
+def greetText():
+    pass
 

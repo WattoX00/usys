@@ -9,7 +9,6 @@ from .shell.dictcompleter import DictCompleter
 from .functions.commands import USER_COMMANDS, USER_ALIASES, GROUP_COMMANDS, GROUP_ALIASES, PERMISSION_COMMANDS, PERMISSION_ALIASES, SSH_COMMANDS, SSH_ALIASES, SAMBA_COMMANDS, SAMBA_ALIASES, APACHE_COMMANDS, APACHE_ALIASES, root_help, helpFull
 from prompt_toolkit import PromptSession
 
-
 def parse_args():
     parser = argparse.ArgumentParser(
         prog="usys",
