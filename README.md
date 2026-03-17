@@ -1,5 +1,12 @@
 # USYS – Linux User Manager
 
+[![Version](https://img.shields.io/badge/version-0.1.3-blue?style=for-the-badge)](https://github.com/WattoX00/usys/releases/tag/v0.1.3)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue?style=for-the-badge)
+[![PyPI](https://img.shields.io/pypi/v/usys?style=for-the-badge)](https://pypi.org/project/usys/)
+![Status](https://img.shields.io/badge/status-active-success?style=for-the-badge)
+![Build](https://img.shields.io/github/actions/workflow/status/wattox00/usys/publish.yml?style=for-the-badge)
+[![License](https://img.shields.io/github/license/wattox00/usys?style=for-the-badge)](https://github.com/WattoX00/usys/blob/main/LICENSE)
+
 USYS is a simple command-line Linux user and group management tool.
 It provides an interactive interface to manage users and groups using
 clear commands and short aliases.
@@ -11,7 +18,7 @@ clear commands and short aliases.
 - [Features](#features)
 - [Disclaimer](#disclaimer)
 - [Usage](#usage)
-- [Command Guide](#commands)
+- [Commands](#commands)
 - [Support](#support)
 - [License](#license)
 
@@ -202,3 +209,17 @@ If you encounter any issues, please report them here:
 [https://github.com/WattoX00/usys/issues](https://github.com/WattoX00/usys/issues)
 
 Thank you for using USYS!
+
+## ❤️ Support
+
+If this project saved you time, taught you something, or made your day a little easier,
+you can support its development here:
+
+👉 **[Buy me a coffee via PayPal](https://www.paypal.com/paypalme/wattox)**
+
+Your support helps keep the project:
+- Actively maintained
+- Continuously improved
+- Free and open source
+
+Thanks for being part of the community 🤝
