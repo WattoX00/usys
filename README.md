@@ -197,9 +197,9 @@ These commands switch you into dedicated management shells:
 </details>
 
 ## Flags (run outside USYS):
-usys --version     Show the installed version
-usys --update      Check for updates and install if available
-usys --helpf       Show full help message
+- `usys --version`  |   Show the installed version
+- `usys --update`   |   Check for updates and install if available
+- `usys --helpf`    |   Show full help message
 
 ## Documentation and source code:
 [https://github.com/WattoX00/usys](https://github.com/WattoX00/usys)
