@@ -27,12 +27,12 @@ class UsysUpdate():
             update_question = input("Do you want to update it now? [Y/n]: ").strip().lower()
             if update_question in ("", "y", "yes"):
                 try:
-                    print("Running: pipx upgrade todol")
+                    print("Running: pipx upgrade usys")
                     subprocess.run(["pipx", "upgrade", PACKAGE_NAME], check=True)
                     print("Update completed!")
                 except FileNotFoundError:
                     print("pipx not found. Please install it first: https://pipx.pypa.io/latest/installation/")
                 except subprocess.CalledProcessError:
-                    print("Update failed. Try running the command manually: pipx upgrade todol")
+                    print("Update failed. Try running the command manually: pipx upgrade usys")
 
         sys.exit(0)
