@@ -228,12 +228,18 @@ class PermissionFunctions():
     def createHardLink():
         print("\nCreate HARD link")
 
-        source = Functions.folder(must_exist=True)
+        source = Functions.path(must_exist=True)
+
         if not source:
+            return
+
+        if not os.path.isfile(source):
+            print("Hard links can only be created for files.")
             return
 
         print("Select destination directory:")
         dest_dir = Functions.folder(must_exist=True)
+
         if not dest_dir:
             return
 
@@ -244,6 +250,10 @@ class PermissionFunctions():
             return
 
         dest_path = os.path.join(dest_dir, link_name)
+
+        if os.path.exists(dest_path):
+            print("Destination already exists.")
+            return
 
         Functions.executeCmd(
             ["sudo", "ln", source, dest_path]
@@ -256,12 +266,14 @@ class PermissionFunctions():
     def createSoftLink():
         print("\nCreate SOFT (symbolic) link")
 
-        source = Functions.folder(must_exist=True)
+        source = Functions.path(must_exist=True)
+
         if not source:
             return
 
         print("Select destination directory:")
         dest_dir = Functions.folder(must_exist=True)
+
         if not dest_dir:
             return
 
@@ -273,11 +285,137 @@ class PermissionFunctions():
 
         dest_path = os.path.join(dest_dir, link_name)
 
+        if os.path.exists(dest_path):
+            print("Destination already exists.")
+            return
+
         Functions.executeCmd(
             ["sudo", "ln", "-s", source, dest_path]
         )
 
         print(f"Soft link created: {dest_path}")
+
+
+    @staticmethod
+    def viewLink():
+        print("\nView Link Information")
+
+        path = Functions.path(must_exist=True)
+
+        if not path:
+            return
+
+        if not os.path.islink(path):
+            print("Selected path is not a symbolic link.")
+            return
+
+        print(f"\nLink: {path}")
+
+        Functions.executeCmd(
+            ["readlink", "-f", path]
+        )
+
+
+    @staticmethod
+    def updateLink():
+        print("\nUpdate (Repoint) Symbolic Link")
+
+        link_path = Functions.path(must_exist=True)
+
+        if not link_path:
+            return
+
+        if not os.path.islink(link_path):
+            print("Selected path is not a symbolic link.")
+            return
+
+        print("Select new target:")
+        new_target = Functions.path(must_exist=True)
+
+        if not new_target:
+            return
+
+        Functions.executeCmd(
+            ["sudo", "ln", "-sf", new_target, link_path]
+        )
+
+        print("Symbolic link updated.")
+
+
+    @staticmethod
+    def deleteLink():
+        print("\nDelete Link")
+
+        path = Functions.path(must_exist=True)
+
+        if not path:
+            return
+
+        if not os.path.islink(path) and not os.path.isfile(path):
+            print("Selected path is not a valid link.")
+            return
+
+        confirm = input(f"Delete link '{path}'? (y/n): ").strip().lower()
+
+        if confirm != "y":
+            print("Cancelled.")
+            return
+
+        Functions.executeCmd(
+            ["sudo", "rm", path]
+        )
+
+        print("Link deleted.")
+
+
+    @staticmethod
+    def listLinksInDirectory():
+        print("\nList Links In Directory")
+
+        directory = Functions.folder(must_exist=True)
+
+        if not directory:
+            return
+
+        print(f"\nSymbolic links inside: {directory}\n")
+
+        try:
+            for item in os.listdir(directory):
+
+                full_path = os.path.join(directory, item)
+
+                if os.path.islink(full_path):
+
+                    target = os.readlink(full_path)
+
+                    print(f"{item} -> {target}")
+
+        except Exception as e:
+            print(f"Error listing links: {e}")
+
+
+    @staticmethod
+    def linkInfo():
+        print("\nDetailed Link Information")
+
+        path = Functions.path(must_exist=True)
+
+        if not path:
+            return
+
+        print(f"\nPath: {path}\n")
+
+        Functions.executeCmd(
+            ["ls", "-l", path]
+        )
+
+        if os.path.islink(path):
+
+            print("\nLink Target:")
+
+            Functions.executeCmd(
+                ["readlink", "-f", path]
+            )
 
     @staticmethod
     def helptext():
@@ -304,7 +442,7 @@ class PermissionFunctions():
         LINK MANAGEMENT
         hardlink       (hl)    Create hard link
         softlink       (sl)    Create symbolic link
-        
+
                     HELP & EXIT
         help            (h)     Show this help text
         quit            (q)     Quit the program
