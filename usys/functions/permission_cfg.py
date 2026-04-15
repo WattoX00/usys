@@ -442,6 +442,11 @@ class PermissionFunctions():
         LINK MANAGEMENT
         hardlink       (hl)    Create hard link
         softlink       (sl)    Create symbolic link
+        viewlink       (vl)    View link target
+        updatelink     (ul)    Update symbolic link target
+        deletelink     (dl)    Delete link
+        listlinks      (ll)    List links in directory
+        linkinfo       (li)    Detailed link info
 
                     HELP & EXIT
         help            (h)     Show this help text
