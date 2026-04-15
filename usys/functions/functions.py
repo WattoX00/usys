@@ -124,37 +124,37 @@ class Functions():
                 return (parts[5])
 
     @staticmethod
-        def path(base_path=None, must_exist=True):
-            from ..shell.foldercompleter import FolderCompleter
-            import os
+    def path(base_path=None, must_exist=True):
+        from ..shell.foldercompleter import FolderCompleter
+        import os
 
-            while True:
+        while True:
 
-                path = FolderCompleter.folderPrompt(base_path)
+            path = FolderCompleter.folderPrompt(base_path)
 
-                if path is None:
-                    return None
+            if path is None:
+                return None
 
-                if must_exist and not os.path.exists(path):
-                    print("Path does not exist.")
-                    continue
+            if must_exist and not os.path.exists(path):
+                print("Path does not exist.")
+                continue
 
-                if not must_exist and os.path.exists(path):
-                    print("Path already exists.")
-                    continue
+            if not must_exist and os.path.exists(path):
+                print("Path already exists.")
+                continue
 
-                return path
+            return path
 
-        @staticmethod
-        def isSameFilesystem(path1, path2):
-            try:
-                return os.stat(path1).st_dev == os.stat(path2).st_dev
-            except Exception:
-                return False
+    @staticmethod
+    def isSameFilesystem(path1, path2):
+        try:
+            return os.stat(path1).st_dev == os.stat(path2).st_dev
+        except Exception:
+            return False
 
-        @staticmethod
-        def isLink(path):
-            return os.path.islink(path)
+    @staticmethod
+    def isLink(path):
+        return os.path.islink(path)
 
 class HelpFunctions:
 
