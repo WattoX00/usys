@@ -249,7 +249,6 @@ class HelpFunctions:
         )
         return result is not None and result.returncode == 0
 
-
     @staticmethod
     def groupExists(groupname):
         result = Functions.executeCmd(
