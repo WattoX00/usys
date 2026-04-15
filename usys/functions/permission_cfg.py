@@ -225,6 +225,61 @@ class PermissionFunctions():
         print(f"Recursive group set to '{group}'.")
 
     @staticmethod
+    def createHardLink():
+        print("\nCreate HARD link")
+
+        source = Functions.folder(must_exist=True)
+        if not source:
+            return
+
+        print("Select destination directory:")
+        dest_dir = Functions.folder(must_exist=True)
+        if not dest_dir:
+            return
+
+        link_name = input("Hard link name: ").strip()
+
+        if not link_name:
+            print("Link name cannot be empty.")
+            return
+
+        dest_path = os.path.join(dest_dir, link_name)
+
+        Functions.executeCmd(
+            ["sudo", "ln", source, dest_path]
+        )
+
+        print(f"Hard link created: {dest_path}")
+
+
+    @staticmethod
+    def createSoftLink():
+        print("\nCreate SOFT (symbolic) link")
+
+        source = Functions.folder(must_exist=True)
+        if not source:
+            return
+
+        print("Select destination directory:")
+        dest_dir = Functions.folder(must_exist=True)
+        if not dest_dir:
+            return
+
+        link_name = input("Soft link name: ").strip()
+
+        if not link_name:
+            print("Link name cannot be empty.")
+            return
+
+        dest_path = os.path.join(dest_dir, link_name)
+
+        Functions.executeCmd(
+            ["sudo", "ln", "-s", source, dest_path]
+        )
+
+        print(f"Soft link created: {dest_path}")
+
+    @staticmethod
     def helptext():
         print("""
                 PERMISSION MANAGEMENT
@@ -246,6 +301,10 @@ class PermissionFunctions():
         rchown          (rco)   Recursively change owner
         rchgrp          (rcg)   Recursively change group
 
+        LINK MANAGEMENT
+        hardlink       (hl)    Create hard link
+        softlink       (sl)    Create symbolic link
+        
                     HELP & EXIT
         help            (h)     Show this help text
         quit            (q)     Quit the program
