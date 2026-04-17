@@ -1,6 +1,6 @@
 # USYS – Linux User Manager
 
-[![Version](https://img.shields.io/badge/version-0.1.3-blue?style=for-the-badge)](https://github.com/WattoX00/usys/releases/tag/v0.1.3)
+[![Version](https://img.shields.io/badge/version-0.1.6-blue?style=for-the-badge)](https://github.com/WattoX00/usys/releases/tag/v0.1.6)
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue?style=for-the-badge)
 [![PyPI](https://img.shields.io/pypi/v/usys?style=for-the-badge)](https://pypi.org/project/usys/)
 ![Status](https://img.shields.io/badge/status-active-success?style=for-the-badge)
