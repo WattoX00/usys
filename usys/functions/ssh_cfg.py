@@ -90,6 +90,10 @@ class SSHFunctions:
         ssh_dir = os.path.join(home, ".ssh")
         key_path = os.path.join(ssh_dir, "id_ed25519")
 
+        if os.path.exists(key_path):
+            print("Key already exists. Skipping.")
+            return
+
         Functions.executeCmd(["sudo", "mkdir", "-p", ssh_dir])
         Functions.executeCmd(["sudo", "chmod", "700", ssh_dir])
         Functions.executeCmd(["sudo", "chown", f"{username}:{username}", ssh_dir])
