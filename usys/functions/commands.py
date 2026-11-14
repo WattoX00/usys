@@ -319,3 +319,17 @@ def greetText():
     from prompt_toolkit.shortcuts import clear
     clear()
 
+    print(r"""
+  _   _ ____  __   __ ____
+ | | | / ___| \ \ / / / ___|
+ | | | \___ \  \ V /  \___ \
+ | |_| |___) |  | |    ___) |
+  \___/|____/   |_|   |____/
+
+ Linux User Manager
+ """)
+
+    print(" Type 'h' for help or 'hf' for full help.")
+    print(" Type 'q' to quit.")
+    print()
+
