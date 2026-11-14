@@ -4,8 +4,9 @@ import subprocess
 from importlib.metadata import version, PackageNotFoundError
 
 PACKAGE_NAME = "usys"
+class UsysUpdate:
 
-class UsysUpdate():
+    @staticmethod
     def update():
         try:
             installed_version = version(PACKAGE_NAME)
@@ -13,26 +14,59 @@ class UsysUpdate():
             installed_version = "not installed"
 
         try:
-            resp = requests.get(f"https://pypi.org/pypi/{PACKAGE_NAME}/json", timeout=3)
+            resp = requests.get(
+                f"https://pypi.org/pypi/{PACKAGE_NAME}/json",
+                timeout=3
+            )
             resp.raise_for_status()
             latest_version = resp.json()["info"]["version"]
-        except Exception:
-            latest_version = "unknown"
 
+        except requests.RequestException:
+            latest_version = None
+
+        # Offline mode
+        if latest_version is None:
+            print(
+                f"{PACKAGE_NAME} {installed_version} "
+                "(offline - update check unavailable)"
+            )
+            sys.exit(0)
+
+        # Already up to date
         if installed_version == latest_version:
-            print(f"{PACKAGE_NAME} {installed_version} Your packages are up to date")
-        else:
-            print(f"{PACKAGE_NAME} {installed_version} (newer version available: {latest_version})")
+            print(
+                f"{PACKAGE_NAME} {installed_version} "
+                "Your packages are up to date"
+            )
 
-            update_question = input("Do you want to update it now? [Y/n]: ").strip().lower()
+        else:
+            print(
+                f"{PACKAGE_NAME} {installed_version} "
+                f"(newer version available: {latest_version})"
+            )
+
+            update_question = input(
+                "Do you want to update it now? [Y/n]: "
+            ).strip().lower()
+
             if update_question in ("", "y", "yes"):
                 try:
                     print("Running: pipx upgrade usys")
-                    subprocess.run(["pipx", "upgrade", PACKAGE_NAME], check=True)
+                    subprocess.run(
+                        ["pipx", "upgrade", PACKAGE_NAME],
+                        check=True
+                    )
                     print("Update completed!")
-                except FileNotFoundError:
-                    print("pipx not found. Please install it first: https://pipx.pypa.io/latest/installation/")
-                except subprocess.CalledProcessError:
-                    print("Update failed. Try running the command manually: pipx upgrade usys")
 
+                except FileNotFoundError:
+                    print(
+                        "pipx not found. Please install it first: "
+                        "https://pipx.pypa.io/latest/installation/"
+                    )
+
+                except subprocess.CalledProcessError:
+                    print(
+                        "Update failed. Try running the command manually: "
+                        "pipx upgrade usys"
+                    )
         sys.exit(0)
