@@ -37,7 +37,7 @@ def main():
         return
 
     if args.version:
-        UsysVersion.version()
+        print(UsysVersion.version())
         return
 
     # main loop
