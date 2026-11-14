@@ -12,7 +12,8 @@ from prompt_toolkit import PromptSession
 def parse_args():
     parser = argparse.ArgumentParser(
         prog="usys",
-        description="Linux User Manager :)",        formatter_class=argparse.RawTextHelpFormatter
+        description="Linux User Manager :)",
+        formatter_class=argparse.RawTextHelpFormatter
     )
     parser.add_argument("-hf", "--helpf", action="store_true", help="show full help message and exit")
 
